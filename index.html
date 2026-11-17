@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Robo3DSG project page (under construction)">
+  <meta name="description" content="Robo3DSG: a two-embodiment dataset and benchmark that measures spatial understanding in vision-language-action models at the level of the relation, with a hierarchical 3D scene graph for every layout, demonstration step and rollout.">
+  <meta property="og:title" content="Robo3DSG: Benchmarking Spatial Understanding in Vision-Language-Action Models">
+  <meta property="og:description" content="38k demonstrations, 400 relation cells, two embodiments, four dimensions of spatial change, hierarchical 3D scene graphs.">
+  <meta property="og:image" content="static/images/overview.png">
   <title>Robo3DSG</title>
   <link rel="stylesheet" href="static/fonts/fonts.css">
   <link rel="stylesheet" href="static/css/style.css">
@@ -21,60 +24,424 @@
     </svg>
 
     <div class="hero-inner">
-      <h1 class="hero-title">Robo3DSG</h1>
-      <p class="hero-subtitle">Paper title coming soon</p>
+      <p class="hero-kicker">Dataset &middot; Benchmark &middot; 3D Scene Graphs</p>
+      <h1 class="hero-title hero-title-main">Robo3DSG</h1>
+      <p class="hero-subtitle hero-sub-main">Benchmarking Spatial Understanding in Vision-Language-Action Models</p>
       <p class="authors">Anonymous authors (under review)</p>
 
       <nav class="hero-links" aria-label="Paper resources">
-        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1">Paper (coming soon)</a>
-        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1">arXiv (coming soon)</a>
-        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1">Code (coming soon)</a>
-        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1">Data (coming soon)</a>
+        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1"><span class="btn-ic" aria-hidden="true">&#128196;</span>Paper (arXiv) &middot; coming soon</a>
+        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1"><span class="btn-ic" aria-hidden="true">&#128451;</span>Dataset &middot; coming soon</a>
+        <a class="btn disabled" href="#" aria-disabled="true" tabindex="-1"><span class="btn-ic" aria-hidden="true">&lt;/&gt;</span>Code &middot; coming soon</a>
       </nav>
+      <p class="hero-note">Data, scene graphs, scene generation and the evaluation harness will be released with the paper.</p>
     </div>
   </header>
 
+  <nav class="section-nav" aria-label="Sections">
+    <a href="#abstract">Abstract</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#embodiments">Embodiments</a>
+    <a href="#scene-graph">3D Scene Graph</a>
+    <a href="#gallery">Videos</a>
+    <a href="#results">Results</a>
+    <a href="#findings">Findings</a>
+    <a href="#bibtex">BibTeX</a>
+  </nav>
+
   <main>
+
+    <section class="section" id="overview">
+      <div class="container">
+        <figure class="figure figure-wide">
+          <img src="static/images/overview.png" alt="Robo3DSG at a glance: hierarchical scene graphs on the Franka arm (left) and the GR1 humanoid (right), dataset scale and the four dimensions of spatial change (centre), and example changes for both robots (bottom)." width="1650" height="470" class="zoomable">
+          <figcaption><strong>Robo3DSG at a glance.</strong> Hierarchical scene graphs link task structure and spatial regions to object geometry on Franka (left) and GR1 (right). Bottom: example changes; green/red rings mark current/previous targets, arrows mark object&ndash;anchor distances or anchor moves.</figcaption>
+        </figure>
+
+        <div class="stats-row stats-6">
+          <div class="stat"><span class="stat-value">38,098</span><span class="stat-label">demonstrations</span></div>
+          <div class="stat"><span class="stat-value">400</span><span class="stat-label">relation cells (132 held out)</span></div>
+          <div class="stat"><span class="stat-value">6.8M</span><span class="stat-label">scene-graph frames</span></div>
+          <div class="stat"><span class="stat-value">2</span><span class="stat-label">embodiments: Franka arm, GR1 humanoid</span></div>
+          <div class="stat"><span class="stat-value">4 &times; 2</span><span class="stat-label">dimensions &times; sub-factors of change</span></div>
+          <div class="stat"><span class="stat-value">11</span><span class="stat-label">VLA policies evaluated</span></div>
+        </div>
+      </div>
+    </section>
 
     <section class="section" id="abstract">
       <div class="container narrow">
         <h2 class="section-title">Abstract</h2>
-        <p class="coming-soon">Coming soon.</p>
+        <p class="abstract-text">A vision-language-action model (VLA) that succeeds 99% of the time on LIBERO-Spatial can still fail to tell the correct object when visually identical objects are rearranged. Current benchmarks cannot expose this, because they score whether a task finished, and cannot distinguish between errors in selecting the intended object based on its spatial relation and errors in achieving the requested relation. We introduce <strong>Robo3DSG</strong> (Robot 3D Scene Graph), a dataset and benchmark that measures <em>spatial understanding</em> at the level of the relation. The dataset contains 38k demonstrations over 400 relation cells, of which 132 are held out, and spans a single arm and a bimanual humanoid. Four evaluation levels compose changes along four dimensions: visual, semantic, object&ndash;anchor distance, and spatial configuration. Every layout, demonstration step, and evaluated rollout carries a <em>hierarchical 3D scene graph</em> whose layers run from the task to the objects and the end effector, and whose edges store the measured value of every relation. We define spatial understanding as relational binding, metric acuity, and relational production, and measure each with its robustness under composition. These results suggest that current VLAs remain limited in grounding spatial instructions in metric geometry and updating object selection when relations change.</p>
       </div>
     </section>
 
-    <section class="section" id="teaser">
-      <div class="container ">
-        <h2 class="section-title">Teaser</h2>
-        <p class="coming-soon">Coming soon.</p>
-      </div>
-    </section>
-
-    <section class="section" id="method">
+    <section class="section" id="task">
       <div class="container narrow">
-        <h2 class="section-title">Method</h2>
-        <p class="coming-soon">Coming soon.</p>
+        <h2 class="section-title">One Task Template</h2>
+        <p class="body-text center-text">&ldquo;Pick up the bowl <span class="kw-ref">right of the cookie box</span> and place it <span class="kw-goal">left of the plate</span>.&rdquo;</p>
+        <p class="body-text">Every scene holds three <strong>visually identical candidates</strong> (bowls on Franka, cans on GR1) and named anchors, so the spatial relation is the only information that identifies the target. A <em>reference</em> relation selects one candidate and a <em>goal</em> relation specifies where to place it; a reference&ndash;goal pair is a <em>relation cell</em>. Each relation is a geometric rule in a fixed scene frame, and the same rules resolve referents and score rollouts. The template tests three abilities:</p>
+        <div class="principles principles-3">
+          <div class="principle"><h3>Relational binding</h3><p>Bind the words to the right candidate and the right anchor, also when another candidate satisfies the relation with an unnamed anchor.</p></div>
+          <div class="principle"><h3>Metric acuity</h3><p>Keep selecting correctly as the measured target&ndash;anchor gap leaves the training range.</p></div>
+          <div class="principle"><h3>Relational production</h3><p>Achieve the requested placement relation, without disturbing the other objects.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benchmark">
+      <div class="container">
+        <h2 class="section-title">Benchmark Design</h2>
+        <p class="body-text narrow">Changes are organised into four dimensions with two sub-factors each. Some changes preserve the target (appearance, wording, distance); others require selecting a different object (relation flip, anchor move).</p>
+
+        <div class="dim-grid">
+          <div class="dim-card dim-vsr">
+            <span class="dim-tag">VSR</span>
+            <h3>Visual Spatial Robustness</h3>
+            <p>Changes illumination and backgrounds, or adds unnamed clutter. The target is preserved.</p>
+            <ul><li><strong>Background</strong> (sampled jointly with lighting)</li><li><strong>Clutter</strong></li></ul>
+          </div>
+          <div class="dim-card dim-ssu">
+            <span class="dim-tag">SSU</span>
+            <h3>Semantic Spatial Understanding</h3>
+            <p>Substitutes synonyms, or flips the relation word so that a different referent is selected.</p>
+            <ul><li><strong>Synonym</strong></li><li><strong>Flip</strong> (new target)</li></ul>
+          </div>
+          <div class="dim-card dim-ocd">
+            <span class="dim-tag">OCD</span>
+            <h3>Object-Centric Distance</h3>
+            <p>Expands near and far target&ndash;anchor gaps beyond their training bins (contact relation <em>on</em> excluded).</p>
+            <ul><li><strong>Near gap</strong></li><li><strong>Far gap</strong></li></ul>
+          </div>
+          <div class="dim-card dim-scr">
+            <span class="dim-tag">SCR</span>
+            <h3>Spatial Configuration Robustness</h3>
+            <p>Adds identical candidates, or moves the reference anchor so that the target changes.</p>
+            <ul><li><strong>Extra bowls / cans</strong></li><li><strong>Anchor move</strong> (new target)</li></ul>
+          </div>
+        </div>
+
+        <h3 class="sub-title">Difficulty levels</h3>
+        <div class="levels">
+          <div class="level"><span class="level-name">Seen</span><span class="level-desc">training layouts and settings, training cells</span></div>
+          <div class="level level-easy"><span class="level-name">Easy L1 / L2 / L3</span><span class="level-desc">one primary change at three strengths, new layouts, training + held-out cells</span></div>
+          <div class="level level-medium"><span class="level-name">Medium</span><span class="level-desc">primary change + one companion change at medium settings</span></div>
+          <div class="level level-hard"><span class="level-name">Hard</span><span class="level-desc">primary change + two to four companions at hard settings</span></div>
+        </div>
+        <p class="body-text narrow small-text">Comparing L2 with medium and L3 with hard separates the strength of a change from the composition of changes. All items are checked for a unique referent, reachability and a feasible placement.</p>
+
+        <div class="split">
+          <div class="split-col">
+            <div class="table-wrap">
+              <table class="settings-table">
+                <caption>Perturbation settings, shared by Franka and GR1. Gaps in cm; lighting scales the nominal intensity; S/U = seen/unseen pools.</caption>
+                <thead>
+                  <tr><th></th><th>Setting</th><th>Training (seen)</th><th>Easy</th><th>Medium</th><th>Hard</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td rowspan="3" class="dimcell dim-vsr-t">VSR</td><td>Background</td><td>S</td><td>S, new mix</td><td>half U</td><td>U</td></tr>
+                  <tr><td>Lighting</td><td>0.8&ndash;1.25</td><td>0.7&ndash;0.8 or 1.25&ndash;1.4</td><td>0.35&ndash;0.55 or 1.5&ndash;1.7</td><td>0.27&ndash;0.35 or 1.7&ndash;1.95</td></tr>
+                  <tr><td>Clutter</td><td>1&ndash;2, S</td><td>3, S</td><td>4&ndash;5, half U</td><td>5&ndash;6, U</td></tr>
+                  <tr class="grp"><td rowspan="2" class="dimcell dim-ssu-t">SSU</td><td>Synonym</td><td>S</td><td>S, new sentence</td><td>U</td><td>U, longest form</td></tr>
+                  <tr><td>Flip</td><td>reference edit</td><td>reference edit</td><td>+ goal edit or U wording</td><td>U wording; goal optional</td></tr>
+                  <tr class="grp"><td rowspan="2" class="dimcell dim-ocd-t">OCD</td><td>Near gap</td><td>0.5&ndash;4</td><td>5&ndash;6.5</td><td>8&ndash;12</td><td>12&ndash;16</td></tr>
+                  <tr><td>Far gap</td><td>4&ndash;8</td><td>8&ndash;10</td><td>12&ndash;16</td><td>16&ndash;20</td></tr>
+                  <tr class="grp"><td rowspan="2" class="dimcell dim-scr-t">SCR</td><td>Extra bowls/cans</td><td>0&ndash;1</td><td>+1</td><td>+2</td><td>+2</td></tr>
+                  <tr><td>Anchor move</td><td>one anchor</td><td>new target</td><td>new target</td><td>&ge;14 cm; new target</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="split-col">
+            <figure class="figure">
+              <img src="static/images/organization.png" alt="Relation cells (train and held out) on Franka and GR1, and the training demonstrations split by dimension, sub-factor and embodiment." width="775" height="410" loading="lazy" class="zoomable">
+              <figcaption>Left: training and held-out relation cells (rows: reference relation, columns: goal relation). Right: 38,098 training demonstrations by dimension, sub-factor and embodiment.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="embodiments">
+      <div class="container">
+        <h2 class="section-title">Two Embodiments, One Recipe</h2>
+        <p class="body-text narrow">Both subsets use the same task template, hold out about 30% of the relation cells, and generate demonstrations for the baseline and all eight sub-factors, keeping only demonstrations that pass the evaluation success rule. About one fifth of the demonstrations are baseline and the rest is spread evenly over the sub-factors.</p>
+
+        <div class="embodiment-grid">
+          <div class="embodiment-card">
+            <h3>Robo3DSG-Franka</h3>
+            <p>A Franka Panda arm selects among three identical bowls on the LIBERO tabletop. Eight reference and five goal relations define 40 relation cells (28 train / 12 held out), with ten layouts per training cell. A MimicGen-style replay generates the baseline demonstrations and a SkillGen-style planner the perturbed ones: <strong>26,098 demonstrations</strong>.</p>
+          </div>
+          <div class="embodiment-card">
+            <h3>Robo3DSG-GR1</h3>
+            <p>A Fourier GR1 humanoid selects among three identical cans on a RoboCasa kitchen counter. Six reference and five goal relations define 30 cells (20 train / 10 held out), repeated in twelve tasks built from the RoboCasa GR1 pick-and-place tasks (360 cells, 120 held out). A scripted planner generates <strong>12,000 demonstrations</strong>, 1,000 per task.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split-col">
+            <div class="table-wrap">
+              <table class="settings-table">
+                <caption>Embodiment settings. Both use 20 Hz control and 256&times;256 images; disturbance limits are translation / tilt.</caption>
+                <thead><tr><th>Setting</th><th>Robo3DSG-Franka</th><th>Robo3DSG-GR1</th></tr></thead>
+                <tbody>
+                  <tr><td>Robot</td><td>Franka Panda arm</td><td>Fourier GR1 humanoid</td></tr>
+                  <tr><td>Action</td><td>End-effector delta + gripper</td><td>29 joint targets</td></tr>
+                  <tr><td>Cameras</td><td>Agent view + wrist</td><td>Head (egoview)</td></tr>
+                  <tr><td>Candidates</td><td>3 identical bowls</td><td>3 identical cans</td></tr>
+                  <tr><td>Anchors</td><td>Cookie box, ramekin, plate</td><td>3 containers per task</td></tr>
+                  <tr><td>Cells (train / held out)</td><td>40 (28 / 12)</td><td>360 (240 / 120)</td></tr>
+                  <tr><td>Horizon (steps)</td><td>220</td><td>720</td></tr>
+                  <tr><td>Disturbance limit</td><td>3 cm / 30&deg;</td><td>2 cm / 15&deg;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="split-col">
+            <figure class="figure">
+              <img src="static/images/gr1_tasks.jpg" alt="The twelve GR1 tasks on RoboCasa kitchen counters, each with three identical cans and three containers; the target can is ringed in green." width="1024" height="768" loading="lazy" class="zoomable">
+              <figcaption>The twelve Robo3DSG-GR1 tasks (target can ringed in green).</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scene-graph">
+      <div class="container">
+        <h2 class="section-title">Every Trajectory is a Hierarchical 3D Scene Graph</h2>
+        <p class="body-text narrow">Every layout, demonstration step, and evaluated rollout carries a directed 3D scene graph. Object nodes store identity, pose, size and bounding-box centres; relation edges store directional offsets, footprint gaps and centre distances. Three tiers organise six layers (site/task, areas, zones, places, objects, end-effectors): <em>T<sub>1</sub></em> splits the task into selection and placement and resolves the target, <em>T<sub>2</sub></em> groups candidates by anchor and flags cross-anchor traps, <em>T<sub>3</sub></em> attaches the metric geometry, the goal and the end-effector trajectory. Snapshots are recorded at 20 Hz with persistent identities. One representation <strong>defines the task, scores the rollout, and provides supervision targets</strong>. Policies receive only images, the instruction and the robot state.</p>
+
+        <figure class="figure figure-wide">
+          <img src="static/images/scene_graph.png" alt="(a) The layered graph at one transport step; (b) one graph per control step, with reference, holding and goal edges appearing and disappearing as the bowl moves; (c) what each edge provides: metric values, text targets and verified checks." width="1600" height="830" loading="lazy" class="zoomable">
+          <figcaption>(a) Three tiers connect task structure to objects and the gripper trajectory. (b) Reference, holding, and goal edges track manipulation with measured spatial values. (c) Each edge supplies scoring measurements and serialised supervision targets.</figcaption>
+        </figure>
+
+        <div class="split split-video">
+          <div class="split-col">
+            <div class="video-frame">
+              <video class="lazy-video" muted loop playsinline preload="none" data-src="static/videos/scene_graph_trajectory.mp4" aria-label="Animated scene-graph trajectory of one Franka demonstration"></video>
+            </div>
+          </div>
+          <div class="split-col">
+            <h3 class="sub-title left">The graph over time</h3>
+            <p class="body-text small-text">One Franka demonstration (&ldquo;pick up the black bowl right of the cookie box and place it left of the plate&rdquo;) replayed from its scene graph. The <span class="kw-ref">reference edge</span> identifies the target until the grasp, the <span class="kw-hold">holding edge</span> records grasp and transport, and the <span class="kw-goal">goal edge</span> becomes true at release. The timeline below the scene shows every edge per control step and the measured gap to the goal anchor in cm.</p>
+            <p class="body-text small-text">Rollouts are scored from the same graph: a rollout counts only if the <strong>first object lifted is the target</strong>, the target <strong>ends in the goal relation</strong>, and <strong>no other object is disturbed</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <h2 class="section-title">Demonstrations and Rollouts</h2>
+        <p class="body-text narrow">Demonstrations from both embodiments for the baseline and every sub-factor, plus zero-shot rollouts of a released LIBERO checkpoint. Videos play at 1.5&times; speed (rollouts: real time) and start when they scroll into view.</p>
+
+        <div class="filters" role="group" aria-label="Video filters">
+          <div class="filter-group" data-filter="robot">
+            <span class="filter-label">Robot</span>
+            <button type="button" class="chip active" data-value="all">All</button>
+            <button type="button" class="chip" data-value="franka">Franka</button>
+            <button type="button" class="chip" data-value="gr1">GR1</button>
+          </div>
+          <div class="filter-group" data-filter="dim">
+            <span class="filter-label">Dimension</span>
+            <button type="button" class="chip active" data-value="all">All</button>
+            <button type="button" class="chip" data-value="base">Baseline</button>
+            <button type="button" class="chip chip-vsr" data-value="vsr">VSR</button>
+            <button type="button" class="chip chip-ssu" data-value="ssu">SSU</button>
+            <button type="button" class="chip chip-ocd" data-value="ocd">OCD</button>
+            <button type="button" class="chip chip-scr" data-value="scr">SCR</button>
+          </div>
+          <div class="filter-group" data-filter="kind">
+            <span class="filter-label">Type</span>
+            <button type="button" class="chip active" data-value="all">All</button>
+            <button type="button" class="chip" data-value="demo">Demonstrations</button>
+            <button type="button" class="chip" data-value="rollout">Zero-shot rollouts</button>
+          </div>
+        </div>
+
+        <div class="gallery" id="gallery-grid">
+          <!-- Franka demonstrations -->
+          <figure class="clip" data-robot="franka" data-dim="base" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_clean.jpg" data-src="static/videos/franka/clean.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl left of the plate and place it right of the cookie box&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="vsr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_background.jpg" data-src="static/videos/franka/background.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-vsr">VSR &middot; background</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl between the plate and the cookie box and place it in front of the ramekin&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="vsr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_clutter.jpg" data-src="static/videos/franka/clutter.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-vsr">VSR &middot; clutter</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl on the cookie box and place it right of the plate&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="ssu" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_synonym.jpg" data-src="static/videos/franka/synonym.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ssu">SSU &middot; synonym</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl that is in front of the ramekin and place it behind the plate&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="ssu" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_flip.jpg" data-src="static/videos/franka/flip.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ssu">SSU &middot; flip</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl left of the cookie box and place it behind the ramekin&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="ocd" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_near.jpg" data-src="static/videos/franka/gap_near.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ocd">OCD &middot; near gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl nearest to the ramekin and place it behind the plate&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="ocd" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_far.jpg" data-src="static/videos/franka/gap_far.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ocd">OCD &middot; far gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl in front of the ramekin and place it on the plate&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="scr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_extra_bowl.jpg" data-src="static/videos/franka/extra_bowl.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-scr">SCR &middot; extra bowl</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl right of the ramekin and place it in front of the cookie box&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="scr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_anchor_move.jpg" data-src="static/videos/franka/anchor_move.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-scr">SCR &middot; anchor move</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl next to the plate and place it on the ramekin&rdquo;</span></figcaption>
+          </figure>
+
+          <!-- GR1 demonstrations -->
+          <figure class="clip" data-robot="gr1" data-dim="base" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_clean.jpg" data-src="static/videos/gr1/clean.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-base">Baseline</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can closest to the plate and place it on the plate&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="vsr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_background.jpg" data-src="static/videos/gr1/background.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-vsr">VSR &middot; background</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the pot and place it in front of the pot&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="vsr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_clutter.jpg" data-src="static/videos/gr1/clutter.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-vsr">VSR &middot; clutter</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can between the tray and the bowl and place it behind the pot&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="ssu" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_synonym.jpg" data-src="static/videos/gr1/synonym.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ssu">SSU &middot; synonym</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can on the left side of the pan and place it on the right side of the pan&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="ssu" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_flip.jpg" data-src="static/videos/gr1/flip.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ssu">SSU &middot; flip</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the cutting board and place it in the pan&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="ocd" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_near.jpg" data-src="static/videos/gr1/gap_near.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ocd">OCD &middot; near gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the bowl and place it in front of the bowl&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="ocd" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_far.jpg" data-src="static/videos/gr1/gap_far.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ocd">OCD &middot; far gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the cardboard box and place it in the cardboard box&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="scr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_extra_can.jpg" data-src="static/videos/gr1/extra_can.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-scr">SCR &middot; extra can</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the cardboard box and place it in the cardboard box&rdquo;</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="gr1" data-dim="scr" data-kind="demo">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_anchor_move.jpg" data-src="static/videos/gr1/anchor_move.mp4"></video>
+            <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-scr">SCR &middot; anchor move</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the plate and place it on the plate&rdquo;</span></figcaption>
+          </figure>
+
+          <!-- Zero-shot rollouts (released LIBERO checkpoint, Franka) -->
+          <figure class="clip" data-robot="franka" data-dim="base" data-kind="rollout">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_wrong_bowl.jpg" data-src="static/videos/rollouts/zeroshot_wrong_bowl.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-fail">zero-shot &middot; fail: wrong bowl</span><span class="instr">&pi;<sub>0.5</sub>, released LIBERO checkpoint. &ldquo;pick up the black bowl behind the cookie box and place it right of the plate&rdquo;: the first bowl lifted is not the target.</span></figcaption>
+          </figure>
+          <figure class="clip" data-robot="franka" data-dim="base" data-kind="rollout">
+            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_no_place.jpg" data-src="static/videos/rollouts/zeroshot_no_place.mp4"></video>
+            <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-fail">zero-shot &middot; fail: goal not reached</span><span class="instr">&pi;<sub>0.5</sub>, released LIBERO checkpoint. &ldquo;pick up the black bowl behind the ramekin and place it right of the plate&rdquo;: correct bowl selected, placement relation never achieved.</span></figcaption>
+          </figure>
+        </div>
+        <p class="gallery-empty" hidden>No clips match this filter combination.</p>
       </div>
     </section>
 
     <section class="section" id="results">
-      <div class="container narrow">
+      <div class="container">
         <h2 class="section-title">Results</h2>
-        <p class="coming-soon">Coming soon.</p>
+        <p class="body-text narrow">Scores are the <strong>relational success rate</strong> (RSR, %): a rollout counts only if the first object lifted is the target (S<sub>i</sub>&nbsp;=&nbsp;1), the target ends in the goal relation (C<sub>i</sub>&nbsp;=&nbsp;1) and nothing else is disturbed (D<sub>i</sub>&nbsp;=&nbsp;0), so RSR&nbsp;=&nbsp;(1/N)&nbsp;&Sigma;<sub>i</sub>&nbsp;S<sub>i</sub>C<sub>i</sub>(1&minus;D<sub>i</sub>). Unlike LIBERO success, RSR fails a rollout that first lifts a wrong candidate or knocks over another object. On Franka, each checkpoint runs 6,000 rollouts (6 conditions &times; 8 variants &times; 125 scenes); on GR1, 5,700. <em>0-shot</em> is the released checkpoint averaged over the six conditions; <em>trained</em> is fine-tuned on our demonstrations. Best per column in bold.</p>
+
+        <h3 class="sub-title">Robo3DSG-Franka: 11 policies</h3>
+        <div class="table-wrap results-wrap">
+          <table class="results-table">
+            <thead>
+              <tr><th rowspan="2" class="th-left">Family</th><th rowspan="2" class="th-left">Policy</th><th class="th-group">LIBERO</th><th class="th-group">0-shot</th><th colspan="6" class="th-group">trained on Robo3DSG-Franka</th></tr>
+              <tr><th>Spatial</th><th>avg.</th><th>seen</th><th>L1</th><th>L2</th><th>L3</th><th>medium</th><th>hard</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fam-start"><td rowspan="3" class="fam">Generalist</td><td class="pol">&pi;<sub>0.5</sub></td><td>98.8</td><td>2.7</td><td>83.9</td><td>75.1</td><td>67.6</td><td>61.9</td><td>56.7</td><td>21.2</td></tr>
+              <tr><td class="pol">GR00T N1.7</td><td>97.7</td><td>0.9</td><td>87.8</td><td>67.7</td><td>60.2</td><td>52.0</td><td>50.0</td><td>18.7</td></tr>
+              <tr><td class="pol">OpenVLA-OFT</td><td>97.6</td><td>2.9</td><td>63.3</td><td>18.5</td><td>15.6</td><td>14.9</td><td>11.8</td><td>7.0</td></tr>
+              <tr class="fam-start"><td rowspan="2" class="fam">Geometry</td><td class="pol">GAM</td><td>98.6</td><td>0.1</td><td>22.4</td><td>4.7</td><td>4.1</td><td>4.0</td><td>4.0</td><td>2.7</td></tr>
+              <tr><td class="pol">Spatial Forcing</td><td>99.4</td><td>1.7</td><td>55.7</td><td>20.2</td><td>18.6</td><td>17.8</td><td>17.0</td><td>10.0</td></tr>
+              <tr class="fam-start"><td rowspan="2" class="fam">World model</td><td class="pol">LaWAM</td><td>98.4</td><td>2.2</td><td>87.3</td><td>73.9</td><td>66.2</td><td>58.1</td><td>51.9</td><td>13.8</td></tr>
+              <tr><td class="pol">Fast-WAM</td><td>98.2</td><td>1.1</td><td>50.1</td><td>13.1</td><td>11.4</td><td>10.0</td><td>7.5</td><td>3.8</td></tr>
+              <tr class="fam-start"><td rowspan="2" class="fam">Reasoning</td><td class="pol">MolmoAct2</td><td>97.8</td><td class="win">3.4</td><td>79.5</td><td>68.3</td><td>63.4</td><td>56.9</td><td>48.9</td><td>20.2</td></tr>
+              <tr><td class="pol">InstructVLA</td><td>97.3</td><td>0.7</td><td>76.8</td><td>54.4</td><td>47.1</td><td>42.5</td><td>36.9</td><td>12.1</td></tr>
+              <tr class="fam-start"><td rowspan="2" class="fam">RL</td><td class="pol">&pi;<sub>RL</sub></td><td class="win">99.6</td><td>3.1</td><td class="win">91.6</td><td class="win">79.0</td><td class="win">73.9</td><td class="win">65.7</td><td class="win">61.5</td><td class="win">25.2</td></tr>
+              <tr><td class="pol">SimpleVLA-RL</td><td>99.4</td><td>0.3</td><td>62.6</td><td>15.6</td><td>15.4</td><td>14.1</td><td>11.5</td><td>7.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">LIBERO-Spatial: published success. Robo3DSG columns: RSR. Easy = L1&ndash;L3.</p>
+
+        <h3 class="sub-title">Robo3DSG-GR1: 6 policies</h3>
+        <div class="table-wrap results-wrap results-narrow">
+          <table class="results-table">
+            <thead>
+              <tr><th rowspan="2" class="th-left">Family</th><th rowspan="2" class="th-left">Policy</th><th class="th-group">0-shot</th><th colspan="6" class="th-group">trained on Robo3DSG-GR1</th></tr>
+              <tr><th>avg.</th><th>seen</th><th>L1</th><th>L2</th><th>L3</th><th>medium</th><th>hard</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fam-start"><td rowspan="2" class="fam">Generalist</td><td class="pol">&pi;<sub>0.5</sub></td><td>0.0</td><td>39.6</td><td class="win">37.2</td><td>29.5</td><td class="win">29.8</td><td>27.2</td><td>12.1</td></tr>
+              <tr><td class="pol">GR00T N1.7</td><td>0.1</td><td>25.0</td><td>16.7</td><td>15.9</td><td>13.3</td><td>13.8</td><td>5.2</td></tr>
+              <tr class="fam-start"><td class="fam">Geometry</td><td class="pol">GAM</td><td>&ndash;</td><td>21.5</td><td>10.8</td><td>7.0</td><td>6.6</td><td>6.2</td><td>3.8</td></tr>
+              <tr class="fam-start"><td class="fam">World model</td><td class="pol">LaWAM</td><td>0.0</td><td class="win">58.5</td><td>34.8</td><td>21.8</td><td>27.2</td><td>19.5</td><td>12.6</td></tr>
+              <tr class="fam-start"><td class="fam">Reasoning</td><td class="pol">MolmoAct2</td><td>&ndash;</td><td>26.0</td><td>24.4</td><td>21.4</td><td>19.5</td><td>22.4</td><td class="win">14.2</td></tr>
+              <tr class="fam-start"><td class="fam">RL</td><td class="pol">&pi;<sub>RL</sub></td><td>&ndash;</td><td>41.7</td><td>36.7</td><td class="win">30.8</td><td>28.3</td><td class="win">27.5</td><td>13.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">0-shot uses the GR1-compatible checkpoint before fine-tuning (&ndash;: no 29-D GR1 action head before fine-tuning).</p>
+
+        <figure class="figure figure-mid">
+          <img src="static/images/drop_per_dimension.png" alt="Mean relative RSR drop from seen to L1-L3 per changed dimension for each Franka policy; the semantic dimension gives the largest drop for most policies." width="775" height="501" loading="lazy" class="zoomable">
+          <figcaption><strong>Mean drop per dimension (Franka).</strong> Mean relative RSR drop over L1&ndash;L3 versus seen, per changed dimension; the circle marks the largest drop. Low-RSR policies have little room left to drop.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section" id="videos">
+    <section class="section" id="findings">
       <div class="container narrow">
-        <h2 class="section-title">Videos</h2>
-        <p class="coming-soon">Coming soon.</p>
+        <h2 class="section-title">Key Findings</h2>
+        <ol class="findings">
+          <li><strong>LIBERO-Spatial success does not guarantee spatial generalization.</strong> All eleven policies score 97.3&ndash;99.6% on LIBERO-Spatial and at most 3.4% RSR zero-shot. After training on our demonstrations they still differ widely on easy scenes, and all fall substantially from seen to hard (best: 91.6% &rarr; 25.2%).</li>
+          <li><strong>Relational selection degrades with target&ndash;anchor distance.</strong> Policies that select reliably lose about 2.5&ndash;3 points of selection per centimetre and fall to 75% within about 5 cm beyond the training range. A flat distance curve signals a policy that selects poorly at every gap.</li>
+          <li><strong>Old-target persistence is policy-dependent.</strong> After an anchor move or a relation flip, some policies' wrong picks favour the previously correct bowl over the other distractor.</li>
+          <li><strong>The cost of composition depends on the policy.</strong> Composed changes are hard, but their loss is not uniformly greater than the sum of the individual losses.</li>
+          <li><strong>Nearest-object selection is a shared weakness.</strong> <em>Nearest</em> has the lowest selection rate for all reported policies; wrong picks on proximity relations often satisfy the relation with the wrong anchor (anchor traps).</li>
+        </ol>
+      </div>
+      <div class="container">
+        <div class="split split-findings">
+          <figure class="figure">
+            <img src="static/images/finding_distance.png" alt="Gap at which fitted selection falls to 75 percent, and selection slope in points per centimetre, for seven Franka policies." width="775" height="266" loading="lazy" class="zoomable">
+            <figcaption>Finding 2: distance tolerance (M<sub>75</sub>) and selection slope per cm on Franka.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="static/images/finding_target_updates.png" alt="Excess of old-target choices over the 50 percent chance level among wrong first lifts, under anchor moves and relation flips, for seven Franka policies." width="800" height="350" loading="lazy" class="zoomable">
+            <figcaption>Finding 3: old-target excess over 50% chance among wrong first lifts (starred: 95% interval above chance).</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
     <section class="section" id="bibtex">
       <div class="container narrow">
         <h2 class="section-title">BibTeX</h2>
-        <pre class="bibtex"><code>BibTeX coming soon.</code></pre>
+        <pre class="bibtex"><code>@misc{robo3dsg2026,
+  title  = {Robo3DSG: Benchmarking Spatial Understanding
+            in Vision-Language-Action Models},
+  author = {Anonymous},
+  note   = {Under review},
+  year   = {2026}
+}</code></pre>
       </div>
     </section>
 
@@ -82,9 +449,11 @@
 
   <footer class="footer">
     <div class="container">
-      <p>Robo3DSG project page, under construction.</p>
+      <p>Robo3DSG &middot; anonymous project page for a paper under review.</p>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
 
   <script src="static/js/main.js"></script>
 </body>
