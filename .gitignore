@@ -24,3 +24,7 @@ static/images/phases/*_full.png
 # stray local variants
 static/videos/*_old.mp4
 static/images/teaser.pdf
+
+# local-only: backups of replaced assets, and generator scripts (contain local/cluster paths)
+static/_old/
+tools/

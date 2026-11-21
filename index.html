@@ -53,10 +53,36 @@
 
     <section class="section" id="overview">
       <div class="container">
-        <figure class="figure figure-wide">
-          <img src="static/images/overview.png" alt="Robo3DSG at a glance: hierarchical scene graphs on the Franka arm (left) and the GR1 humanoid (right), dataset scale and the four dimensions of spatial change (centre), and example changes for both robots (bottom)." width="1650" height="470" class="zoomable">
-          <figcaption><strong>Robo3DSG at a glance.</strong> Hierarchical scene graphs link task structure and spatial regions to object geometry on Franka (left) and GR1 (right). Bottom: example changes; green/red rings mark current/previous targets, arrows mark object&ndash;anchor distances or anchor moves.</figcaption>
+        <figure class="teaser-pair hfig" id="teaser-videos" data-zoom data-lb-video data-sync role="group" aria-label="One full demonstration per robot: Franka arm (left) and GR1 humanoid (right), with the hierarchical 3D scene graph">
+<div class="hfig-body fc" data-w="1101"><div class="fc-in"><div class="tp-grid">
+<p class="vid-title"><strong>Franka arm</strong> &ldquo;pick up the black bowl right of the cookie box and place it left of the plate&rdquo;</p>
+<p class="vid-title"><strong>GR1 humanoid</strong> &ldquo;pick up the can behind the pan and place it to the right of the pan&rdquo;</p>
+<video class="lazy-video" muted loop playsinline preload="none" width="920" height="780" poster="static/images/posters/teaser_franka.jpg" data-src="static/videos/teaser_franka.mp4" aria-label="One full Franka demonstration with its hierarchical 3D scene graph updating at every control step"></video>
+<video class="lazy-video" muted loop playsinline preload="none" width="1272" height="740" poster="static/images/posters/teaser_gr1.jpg" data-src="static/videos/teaser_gr1.mp4" aria-label="One full GR1 demonstration with its hierarchical 3D scene graph updating at every control step"></video>
+<ul class="tl-legend" aria-label="Timeline rows, top to bottom"><li><b>Phase</b><span class="chip-ph"><i style="background:#9aa5b3"></i>approach</span><span class="chip-ph"><i style="background:#e34948"></i>grasp</span><span class="chip-ph"><i style="background:#1baf7a"></i>transport</span><span class="chip-ph"><i style="background:#eb6834"></i>place</span><span class="chip-ph"><i style="background:#c5ccd4"></i>retreat</span></li><li><i class="sw-r" style="background:#3e79d6"></i>bowl 1 right of cookie box</li><li><i class="sw-r" style="background:#1baf7a"></i>gripper holding bowl 1</li><li><i class="sw-r" style="background:#eb6834"></i>bowl 1 left of plate</li><li class="tl-note"><i class="sw-r sw-cur"></i>current control step (20 Hz), 0 to 160</li></ul>
+<ul class="tl-legend" aria-label="Timeline rows, top to bottom"><li><b>Phase</b><span class="chip-ph"><i style="background:#9aa5b3"></i>approach</span><span class="chip-ph"><i style="background:#1baf7a"></i>transport</span><span class="chip-ph"><i style="background:#eb6834"></i>place</span></li><li><i class="sw-r" style="background:#3e79d6"></i>can 1 behind pan</li><li><i class="sw-r" style="background:#1baf7a"></i>gripper holding can 1</li><li><i class="sw-r" style="background:#eb6834"></i>can 1 right of pan</li><li class="tl-note"><i class="sw-r sw-cur"></i>current control step (20 Hz), 0 to 260</li></ul>
+</div></div></div>
+<figcaption><strong>Franka arm.</strong> One full demonstration (160 control steps): the hierarchical 3D scene graph is recomputed at every step; the bars below show when the reference, holding and goal edges hold. <strong>GR1 humanoid.</strong> One full demonstration (260 control steps) replayed in RoboCasa from its recorded actions: recorded head camera on the left, the scene graph on the robot and object point clouds on the right. The reference edge (target to reference anchor) and the goal edge (target to goal anchor) carry the measured offset and gap in cm in the graph data.</figcaption>
         </figure>
+        <ul class="node-legend" aria-label="Graph node colours">
+          <li><i style="background:#a3b3ff"></i>site / task</li><li><i style="background:#ffb366"></i>areas</li><li><i style="background:#c9a0ff"></i>anchor zones</li><li><i style="background:#6cb4ff"></i>places</li><li><i style="background:#ff7a9a"></i>objects</li><li><i style="background:#ffd166"></i>target</li><li><i style="background:#ff4d4d"></i>held target</li><li><i class="ring" style="border-color:#2ed1c4"></i>gripper</li>
+        </ul>
+        <figure class="figure hfig figure-wide" data-zoom role="group" aria-label="Robo3DSG at a glance">
+<div class="hfig-body fc" data-w="1132"><div class="fc-in"><div class="ov">
+<div class="ov-g ov-gl"><span class="ov-vl">Franka arm</span><img src="static/images/overview/graph_franka.jpg" alt="Hierarchical scene graph on the Franka arm point cloud" width="660" height="590"></div>
+<div class="ov-c">
+  <div class="ov-title"><img class="ov-logo" src="static/images/overview/logo.png" alt="" width="207" height="183"><span>Robo3DSG</span></div>
+  <p class="ov-sub">Robot 3D Scene Graph for spatial understanding</p>
+  <div class="ov-stats"><div class="s1"><b>38k</b><span>demonstrations</span></div><div class="s2"><b>6.8M</b><span>scene-graph frames</span></div><div class="s3"><b>400</b><span>relation cells</span></div></div>
+  <p class="ov-dimhead">four dimensions of spatial change</p>
+  <div class="ov-dims"><div class="ov-dim dim-vsr"><b>Visual (VSR)</b><span>background · clutter</span></div><div class="ov-dim dim-ssu"><b>Semantic (SSU)</b><span>synonym · flip</span></div><div class="ov-dim dim-ocd"><b>Distance (OCD)</b><span>near gap · far gap</span></div><div class="ov-dim dim-scr"><b>Configuration (SCR)</b><span>anchor move · extra object</span></div></div>
+</div>
+<div class="ov-g ov-gr"><img src="static/images/overview/graph_gr1.jpg" alt="Hierarchical scene graph on the GR1 humanoid point cloud" width="672" height="600"><span class="ov-vl">GR1 humanoid</span></div>
+<div class="ov-bottom"><div class="ov-thumbs ov-tf"><span class="ov-vl">Franka</span><div class="ov-th"><i class="ov-bar dim-bg-vsr"></i><div class="ov-img"><img src="static/images/overview/thumb_a.jpg" alt="Example Franka" width="148" height="114" loading="lazy"><span class="ov-badge">(a)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-ssu"></i><div class="ov-img"><img src="static/images/overview/thumb_b.jpg" alt="Example Franka" width="148" height="114" loading="lazy"><span class="ov-badge">(b)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-ocd"></i><div class="ov-img"><img src="static/images/overview/thumb_c.jpg" alt="Example Franka" width="148" height="114" loading="lazy"><span class="ov-badge">(c)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-scr"></i><div class="ov-img"><img src="static/images/overview/thumb_d.jpg" alt="Example Franka" width="148" height="114" loading="lazy"><span class="ov-badge">(d)</span></div></div></div>
+<div class="ov-thumbs ov-tg"><span class="ov-vl">GR1</span><div class="ov-th"><i class="ov-bar dim-bg-vsr"></i><div class="ov-img"><img src="static/images/overview/thumb_e.jpg" alt="Example GR1" width="148" height="114" loading="lazy"><span class="ov-badge">(e)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-ssu"></i><div class="ov-img"><img src="static/images/overview/thumb_f.jpg" alt="Example GR1" width="148" height="114" loading="lazy"><span class="ov-badge">(f)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-ocd"></i><div class="ov-img"><img src="static/images/overview/thumb_g.jpg" alt="Example GR1" width="148" height="114" loading="lazy"><span class="ov-badge">(g)</span></div></div><div class="ov-th"><i class="ov-bar dim-bg-scr"></i><div class="ov-img"><img src="static/images/overview/thumb_h.jpg" alt="Example GR1" width="148" height="114" loading="lazy"><span class="ov-badge">(h)</span></div></div></div></div>
+</div></div></div>
+<figcaption><strong>Robo3DSG at a glance.</strong> Hierarchical scene graphs link task structure and spatial regions to object geometry on Franka (left) and GR1 (right). Bottom: example changes; green/red rings mark current/previous targets, arrows mark object&ndash;anchor distances or anchor moves.</figcaption>
+</figure>
 
         <div class="stats-row stats-6">
           <div class="stat"><span class="stat-value">38,098</span><span class="stat-label">demonstrations</span></div>
@@ -86,6 +112,14 @@
           <div class="principle"><h3>Metric acuity</h3><p>Keep selecting correctly as the measured target&ndash;anchor gap leaves the training range.</p></div>
           <div class="principle"><h3>Relational production</h3><p>Achieve the requested placement relation, without disturbing the other objects.</p></div>
         </div>
+        <figure class="figure hfig figure-wide" data-zoom role="group" aria-label="Task template on Franka: base scene, instruction flip, anchor move">
+<div class="hfig-body fc" data-w="772"><div class="fc-in"><div class="tt-grid">
+<figure class="tt-panel"><div class="tt-title"><b>(a)</b> Base scene</div><div class="tt-img"><img src="static/images/task_template_a.jpg" alt="Franka scene: base scene" width="288" height="288" loading="lazy"><span class="tt-tag tt-anc" style="left:52.95%;top:65.10%">cookie box</span><span class="tt-tag tt-tgt" style="left:15.80%;top:78.30%">bowl 1</span><span class="tt-tag tt-anc" style="left:34.55%;top:80.73%">ramekin</span></div><p class="tt-cap">&ldquo;pick up the black bowl right of the ramekin and place it behind the cookie box&rdquo; &rarr; target bowl 1</p></figure>
+<figure class="tt-panel"><div class="tt-title"><b>(b)</b> Instruction flip, same image</div><div class="tt-img"><img src="static/images/task_template_b.jpg" alt="Franka scene: instruction flip, same image" width="288" height="288" loading="lazy"><span class="tt-tag tt-tgt" style="left:22.57%;top:66.15%">bowl 2</span><span class="tt-tag tt-old" style="left:15.80%;top:78.30%">bowl 1</span><span class="tt-tag tt-anc" style="left:34.55%;top:80.73%">ramekin</span></div><p class="tt-cap">&ldquo;pick up the black bowl behind the ramekin and place it behind the cookie box&rdquo; &rarr; target bowl 2; dashed: old target</p></figure>
+<figure class="tt-panel"><div class="tt-title"><b>(c)</b> Anchor move, same words</div><div class="tt-img"><img src="static/images/task_template_c.jpg" alt="Franka scene: anchor move, same words" width="288" height="288" loading="lazy"><span class="tt-tag tt-anc" style="left:36.81%;top:50.50%">ramekin</span><span class="tt-tag tt-tgt" style="left:22.57%;top:65.97%">bowl 2</span><span class="tt-tag tt-old" style="left:15.97%;top:78.30%">bowl 1</span></div><p class="tt-cap">&ldquo;pick up the black bowl right of the ramekin and place it behind the cookie box&rdquo;; the ramekin moved &rarr; target bowl 2</p></figure>
+</div></div></div>
+<figcaption>The template on Franka. The same three identical bowls: only the relation to the named anchor identifies the target. (a) Base scene. (b) Flip the instruction, same image: a different bowl is the target (dashed: old target). (c) Move the anchor, same words: the target changes again.</figcaption>
+</figure>
       </div>
     </section>
 
@@ -121,6 +155,52 @@
           </div>
         </div>
 
+        <figure class="figure hfig figure-narrow" data-zoom role="group" aria-label="GR1 example scenes for the eight sub-factors at base, easy, medium and hard strength">
+<div class="hfig-body fc" data-w="560"><div class="fc-in"><div class="lvl-grid lg-sf"><span></span><b class="lg-head">base</b><b class="lg-head">easy</b><b class="lg-head">medium</b><b class="lg-head">hard</b>
+<b class="lg-row">background</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/00.jpg" alt="GR1 background, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/01.jpg" alt="GR1 background, easy" width="196" height="196" loading="lazy"><span class="lg-cap">light x1.35</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/02.jpg" alt="GR1 background, medium" width="196" height="196" loading="lazy"><span class="lg-cap">light x0.42</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/03.jpg" alt="GR1 background, hard" width="196" height="196" loading="lazy"><span class="lg-cap">light x0.30</span></div>
+<b class="lg-row">clutter</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/10.jpg" alt="GR1 clutter, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/11.jpg" alt="GR1 clutter, easy" width="196" height="196" loading="lazy"><span class="lg-cap">3 distractors</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/12.jpg" alt="GR1 clutter, medium" width="196" height="196" loading="lazy"><span class="lg-cap">5 distractors</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/13.jpg" alt="GR1 clutter, hard" width="196" height="196" loading="lazy"><span class="lg-cap">5 distractors</span></div>
+<b class="lg-row">synonym</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/20.jpg" alt="GR1 synonym, base" width="196" height="196" loading="lazy"><span class="lg-cap">pick up the can to the left of the pan and place it to the right of the pan</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/21.jpg" alt="GR1 synonym, easy" width="196" height="196" loading="lazy"><span class="lg-cap">pick up the can on the left side of the pan and place it on the right side of the pan</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/22.jpg" alt="GR1 synonym, medium" width="196" height="196" loading="lazy"><span class="lg-cap">grab the can at the left of the pan and put it to the pan&#x27;s right</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/23.jpg" alt="GR1 synonym, hard" width="196" height="196" loading="lazy"><span class="lg-cap">take the can to the pan&#x27;s left and set it to the pan&#x27;s right</span></div>
+<b class="lg-row">flip</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/30.jpg" alt="GR1 flip, base" width="196" height="196" loading="lazy"><span class="lg-cap">pick up the can to the left of the pan and place it to the right of the pan</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/31.jpg" alt="GR1 flip, easy" width="196" height="196" loading="lazy"><span class="lg-cap">pick up the can closest to the pan and place it to the right of the pan</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/32.jpg" alt="GR1 flip, medium" width="196" height="196" loading="lazy"><span class="lg-cap">pick up the can to the right of the pan and place it to the left of the pan</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/33.jpg" alt="GR1 flip, hard" width="196" height="196" loading="lazy"><span class="lg-cap">grab the can with the shortest distance to the pan and put it on the far side of the pan</span></div>
+<b class="lg-row">near gap</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/40.jpg" alt="GR1 near gap, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/41.jpg" alt="GR1 near gap, easy" width="196" height="196" loading="lazy"><span class="lg-cap">gap 6 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/42.jpg" alt="GR1 near gap, medium" width="196" height="196" loading="lazy"><span class="lg-cap">gap 9 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/43.jpg" alt="GR1 near gap, hard" width="196" height="196" loading="lazy"><span class="lg-cap">gap 12 cm</span></div>
+<b class="lg-row">far gap</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/50.jpg" alt="GR1 far gap, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/51.jpg" alt="GR1 far gap, easy" width="196" height="196" loading="lazy"><span class="lg-cap">gap 8 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/52.jpg" alt="GR1 far gap, medium" width="196" height="196" loading="lazy"><span class="lg-cap">gap 12 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/53.jpg" alt="GR1 far gap, hard" width="196" height="196" loading="lazy"><span class="lg-cap">gap 18 cm</span></div>
+<b class="lg-row">extra can</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/60.jpg" alt="GR1 extra can, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/61.jpg" alt="GR1 extra can, easy" width="196" height="196" loading="lazy"><span class="lg-cap">+1 can</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/62.jpg" alt="GR1 extra can, medium" width="196" height="196" loading="lazy"><span class="lg-cap">+2 cans</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/63.jpg" alt="GR1 extra can, hard" width="196" height="196" loading="lazy"><span class="lg-cap">+2 cans</span></div>
+<b class="lg-row">anchor move</b>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/70.jpg" alt="GR1 anchor move, base" width="196" height="196" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/71.jpg" alt="GR1 anchor move, easy" width="196" height="196" loading="lazy"><span class="lg-cap">anchor moved 15 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/72.jpg" alt="GR1 anchor move, medium" width="196" height="196" loading="lazy"><span class="lg-cap">anchor moved 16 cm</span></div>
+<div class="lg-cell"><img src="static/images/sub_factors_gr1/73.jpg" alt="GR1 anchor move, hard" width="196" height="196" loading="lazy"><span class="lg-cap">anchor moved 21 cm</span></div>
+</div></div></div>
+<figcaption>The eight sub-factors on GR1 at base, easy, medium and hard strength (target can ringed in green; the setting is printed under each tile).</figcaption>
+</figure>
+
         <h3 class="sub-title">Difficulty levels</h3>
         <div class="levels">
           <div class="level"><span class="level-name">Seen</span><span class="level-desc">training layouts and settings, training cells</span></div>
@@ -128,6 +208,364 @@
           <div class="level level-medium"><span class="level-name">Medium</span><span class="level-desc">primary change + one companion change at medium settings</span></div>
           <div class="level level-hard"><span class="level-name">Hard</span><span class="level-desc">primary change + two to four companions at hard settings</span></div>
         </div>
+        <figure class="figure hfig figure-wide" data-zoom role="group" aria-label="Which sub-factors are changed in each level">
+<div class="hfig-body fc" data-w="1132"><div class="fc-in"><div class="rec-wrap">
+<div class="rec"><div class="rec-title">seen</div><div class="rec-grid">
+<span></span><b class="rec-dim dim-vsr">VSR</b><b class="rec-dim dim-ssu">SSU</b><b class="rec-dim dim-ocd">OCD</b><b class="rec-dim dim-scr">SCR</b>
+<span></span><i class="rec-f">background</i><i class="rec-f">clutter</i><i class="rec-f">synonym</i><i class="rec-f">flip</i><i class="rec-f">near gap</i><i class="rec-f">far gap</i><i class="rec-f">extra can</i><i class="rec-f">anchor move</i>
+<span class="rec-rl">clean</span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span>
+<span class="rec-rl">background</span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">clutter</span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">synonym</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">flip</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">near gap</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">far gap</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">extra can</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+<span class="rc"></span>
+<span class="rec-rl">anchor move</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-train prim">T</span>
+</div></div>
+<div class="rec"><div class="rec-title">easy</div><div class="rec-grid">
+<span></span><b class="rec-dim dim-vsr">VSR</b><b class="rec-dim dim-ssu">SSU</b><b class="rec-dim dim-ocd">OCD</b><b class="rec-dim dim-scr">SCR</b>
+<span></span><i class="rec-f">background</i><i class="rec-f">clutter</i><i class="rec-f">synonym</i><i class="rec-f">flip</i><i class="rec-f">near gap</i><i class="rec-f">far gap</i><i class="rec-f">extra can</i><i class="rec-f">anchor move</i>
+<span class="rec-rl">clean</span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span>
+<span class="rec-rl">background</span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">clutter</span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">synonym</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">flip</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">near gap</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">far gap</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">extra can</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+<span class="rc"></span>
+<span class="rec-rl">anchor move</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-easy prim">E</span>
+</div></div>
+<div class="rec"><div class="rec-title">medium</div><div class="rec-grid">
+<span></span><b class="rec-dim dim-vsr">VSR</b><b class="rec-dim dim-ssu">SSU</b><b class="rec-dim dim-ocd">OCD</b><b class="rec-dim dim-scr">SCR</b>
+<span></span><i class="rec-f">background</i><i class="rec-f">clutter</i><i class="rec-f">synonym</i><i class="rec-f">flip</i><i class="rec-f">near gap</i><i class="rec-f">far gap</i><i class="rec-f">extra can</i><i class="rec-f">anchor move</i>
+<span class="rec-rl">clean</span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span>
+<span class="rec-rl">background</span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">clutter</span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">synonym</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">flip</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium">M</span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">near gap</span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">far gap</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rec-rl">extra can</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+<span class="rc"></span>
+<span class="rec-rl">anchor move</span>
+<span class="rc"></span>
+<span class="rc on lv-medium">M</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-medium prim">M</span>
+</div></div>
+<div class="rec"><div class="rec-title">hard</div><div class="rec-grid">
+<span></span><b class="rec-dim dim-vsr">VSR</b><b class="rec-dim dim-ssu">SSU</b><b class="rec-dim dim-ocd">OCD</b><b class="rec-dim dim-scr">SCR</b>
+<span></span><i class="rec-f">background</i><i class="rec-f">clutter</i><i class="rec-f">synonym</i><i class="rec-f">flip</i><i class="rec-f">near gap</i><i class="rec-f">far gap</i><i class="rec-f">extra can</i><i class="rec-f">anchor move</i>
+<span class="rec-rl">clean</span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span><span class="rc"></span>
+<span class="rec-rl">background</span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">clutter</span>
+<span class="rc"></span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">synonym</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rec-rl">flip</span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rec-rl">near gap</span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rec-rl">far gap</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rec-rl">extra can</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc on lv-hard prim">H</span>
+<span class="rc"></span>
+<span class="rec-rl">anchor move</span>
+<span class="rc on lv-hard">H</span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc"></span>
+<span class="rc on lv-hard">H</span>
+<span class="rc on lv-hard prim">H</span>
+</div></div>
+</div><div class="rec-legend"><span><i class="sw lv-train"></i>train</span><span><i class="sw lv-easy"></i>easy</span><span><i class="sw lv-medium"></i>medium</span><span><i class="sw lv-hard"></i>hard</span><span><i class="sw prim-sw"></i>primary</span></div></div></div>
+<figcaption>Level composition. Rows: scene recipes, columns: the eight sub-factors; T / E / M / H mark train, easy, medium and hard settings, the ringed cell is the primary change and the others are companions.</figcaption>
+</figure>
+        <figure class="figure hfig figure-wide" data-zoom role="group" aria-label="GR1 example scenes per level and sub-factor">
+<div class="hfig-body fc" data-w="1132"><div class="fc-in"><div class="lvl-grid lg-lv"><span></span><b class="lg-head">clean</b><b class="lg-head">background</b><b class="lg-head">clutter</b><b class="lg-head">synonym</b><b class="lg-head">flip</b><b class="lg-head">gap near</b><b class="lg-head">gap far</b><b class="lg-head">extra can</b><b class="lg-head">anchor move</b>
+<b class="lg-row">seen</b>
+<div class="lg-cell"><img src="static/images/levels_gr1/00.jpg" alt="GR1 seen, clean" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/01.jpg" alt="GR1 seen, background" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/02.jpg" alt="GR1 seen, clutter" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/03.jpg" alt="GR1 seen, synonym" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/04.jpg" alt="GR1 seen, flip" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/05.jpg" alt="GR1 seen, gap near" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/06.jpg" alt="GR1 seen, gap far" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/07.jpg" alt="GR1 seen, extra can" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/08.jpg" alt="GR1 seen, anchor move" width="153" height="153" loading="lazy"></div>
+<b class="lg-row">easy</b>
+<div class="lg-cell"><img src="static/images/levels_gr1/10.jpg" alt="GR1 easy, clean" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/11.jpg" alt="GR1 easy, background" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/12.jpg" alt="GR1 easy, clutter" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/13.jpg" alt="GR1 easy, synonym" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/14.jpg" alt="GR1 easy, flip" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/15.jpg" alt="GR1 easy, gap near" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/16.jpg" alt="GR1 easy, gap far" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/17.jpg" alt="GR1 easy, extra can" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/18.jpg" alt="GR1 easy, anchor move" width="153" height="153" loading="lazy"></div>
+<b class="lg-row">medium</b>
+<div class="lg-cell"><img src="static/images/levels_gr1/20.jpg" alt="GR1 medium, clean" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/21.jpg" alt="GR1 medium, background" width="153" height="153" loading="lazy"><span class="lg-cap">+ clutter</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/22.jpg" alt="GR1 medium, clutter" width="153" height="153" loading="lazy"><span class="lg-cap">+ gap near</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/23.jpg" alt="GR1 medium, synonym" width="153" height="153" loading="lazy"><span class="lg-cap">+ gap far</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/24.jpg" alt="GR1 medium, flip" width="153" height="153" loading="lazy"><span class="lg-cap">+ synonym</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/25.jpg" alt="GR1 medium, gap near" width="153" height="153" loading="lazy"><span class="lg-cap">+ background</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/26.jpg" alt="GR1 medium, gap far" width="153" height="153" loading="lazy"><span class="lg-cap">+ extra can</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/27.jpg" alt="GR1 medium, extra can" width="153" height="153" loading="lazy"><span class="lg-cap">+ synonym</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/28.jpg" alt="GR1 medium, anchor move" width="153" height="153" loading="lazy"><span class="lg-cap">+ clutter</span></div>
+<b class="lg-row">hard</b>
+<div class="lg-cell"><img src="static/images/levels_gr1/30.jpg" alt="GR1 hard, clean" width="153" height="153" loading="lazy"></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/31.jpg" alt="GR1 hard, background" width="153" height="153" loading="lazy"><span class="lg-cap">+ clutter, synonym, gap far</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/32.jpg" alt="GR1 hard, clutter" width="153" height="153" loading="lazy"><span class="lg-cap">+ synonym, flip</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/33.jpg" alt="GR1 hard, synonym" width="153" height="153" loading="lazy"><span class="lg-cap">+ background, gap far</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/34.jpg" alt="GR1 hard, flip" width="153" height="153" loading="lazy"><span class="lg-cap">+ clutter, synonym, extra can</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/35.jpg" alt="GR1 hard, gap near" width="153" height="153" loading="lazy"><span class="lg-cap">+ clutter, synonym, extra can</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/36.jpg" alt="GR1 hard, gap far" width="153" height="153" loading="lazy"><span class="lg-cap">+ background, clutter, synonym, extra can</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/37.jpg" alt="GR1 hard, extra can" width="153" height="153" loading="lazy"><span class="lg-cap">+ background, clutter, synonym, gap near</span></div>
+<div class="lg-cell"><img src="static/images/levels_gr1/38.jpg" alt="GR1 hard, anchor move" width="153" height="153" loading="lazy"><span class="lg-cap">+ background, extra can</span></div>
+</div></div></div>
+<figcaption>The level ladder on GR1: one example per level and sub-factor, with the companion changes listed under each tile.</figcaption>
+</figure>
         <p class="body-text narrow small-text">Comparing L2 with medium and L3 with hard separates the strength of a change from the composition of changes. All items are checked for a unique referent, reachability and a feasible placement.</p>
 
         <div class="split">
@@ -153,10 +591,10 @@
             </div>
           </div>
           <div class="split-col">
-            <figure class="figure">
-              <img src="static/images/organization.png" alt="Relation cells (train and held out) on Franka and GR1, and the training demonstrations split by dimension, sub-factor and embodiment." width="775" height="410" loading="lazy" class="zoomable">
-              <figcaption>Left: training and held-out relation cells (rows: reference relation, columns: goal relation). Right: 38,098 training demonstrations by dimension, sub-factor and embodiment.</figcaption>
-            </figure>
+            <figure class="figure hfig " data-zoom role="group" aria-label="Relation cells and training demonstrations">
+<div class="hfig-body"><svg viewBox="0 0 880 470" role="img" aria-labelledby="t-org" class="chart-svg"><title id="t-org">Relation cells and training demonstrations by dimension, sub-factor and embodiment</title><text x="0" y="22" class="bold">Relation cells</text><rect x="150" y="12" width="14" height="12" class="c-train"/><text x="168" y="23" class="sm">train</text><rect x="222" y="12" width="14" height="12" class="c-hold"/><text x="240" y="23" class="sm">held out</text><text x="122" y="89" text-anchor="end" class="sm">left of</text><text x="122" y="119" text-anchor="end" class="sm">right of</text><text x="122" y="149" text-anchor="end" class="sm">in front of</text><text x="122" y="179" text-anchor="end" class="sm">behind</text><text x="122" y="209" text-anchor="end" class="sm">nearest to</text><text x="122" y="239" text-anchor="end" class="sm">between</text><text x="122" y="269" text-anchor="end" class="sm">next to</text><text x="122" y="299" text-anchor="end" class="sm">on</text><text x="203.0" y="60" text-anchor="middle" class="sm"><tspan class="bold">Franka</tspan>  28 / 12</text><rect x="129.0" y="71.0" width="28" height="28" class="c-hold"/><rect x="159.0" y="71.0" width="28" height="28" class="c-train"/><rect x="189.0" y="71.0" width="28" height="28" class="c-hold"/><rect x="219.0" y="71.0" width="28" height="28" class="c-train"/><rect x="249.0" y="71.0" width="28" height="28" class="c-train"/><rect x="129.0" y="101.0" width="28" height="28" class="c-train"/><rect x="159.0" y="101.0" width="28" height="28" class="c-hold"/><rect x="189.0" y="101.0" width="28" height="28" class="c-train"/><rect x="219.0" y="101.0" width="28" height="28" class="c-hold"/><rect x="249.0" y="101.0" width="28" height="28" class="c-train"/><rect x="129.0" y="131.0" width="28" height="28" class="c-train"/><rect x="159.0" y="131.0" width="28" height="28" class="c-hold"/><rect x="189.0" y="131.0" width="28" height="28" class="c-hold"/><rect x="219.0" y="131.0" width="28" height="28" class="c-train"/><rect x="249.0" y="131.0" width="28" height="28" class="c-train"/><rect x="129.0" y="161.0" width="28" height="28" class="c-train"/><rect x="159.0" y="161.0" width="28" height="28" class="c-train"/><rect x="189.0" y="161.0" width="28" height="28" class="c-train"/><rect x="219.0" y="161.0" width="28" height="28" class="c-hold"/><rect x="249.0" y="161.0" width="28" height="28" class="c-hold"/><rect x="129.0" y="191.0" width="28" height="28" class="c-train"/><rect x="159.0" y="191.0" width="28" height="28" class="c-train"/><rect x="189.0" y="191.0" width="28" height="28" class="c-train"/><rect x="219.0" y="191.0" width="28" height="28" class="c-train"/><rect x="249.0" y="191.0" width="28" height="28" class="c-hold"/><rect x="129.0" y="221.0" width="28" height="28" class="c-hold"/><rect x="159.0" y="221.0" width="28" height="28" class="c-train"/><rect x="189.0" y="221.0" width="28" height="28" class="c-train"/><rect x="219.0" y="221.0" width="28" height="28" class="c-train"/><rect x="249.0" y="221.0" width="28" height="28" class="c-train"/><rect x="129.0" y="251.0" width="28" height="28" class="c-train"/><rect x="159.0" y="251.0" width="28" height="28" class="c-hold"/><rect x="189.0" y="251.0" width="28" height="28" class="c-train"/><rect x="219.0" y="251.0" width="28" height="28" class="c-train"/><rect x="249.0" y="251.0" width="28" height="28" class="c-train"/><rect x="129.0" y="281.0" width="28" height="28" class="c-train"/><rect x="159.0" y="281.0" width="28" height="28" class="c-train"/><rect x="189.0" y="281.0" width="28" height="28" class="c-train"/><rect x="219.0" y="281.0" width="28" height="28" class="c-hold"/><rect x="249.0" y="281.0" width="28" height="28" class="c-train"/><text x="149.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 149.0 328.0)">left</text><text x="179.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 179.0 328.0)">right</text><text x="209.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 209.0 328.0)">front</text><text x="239.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 239.0 328.0)">behind</text><text x="269.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 269.0 328.0)">on</text><text x="375.0" y="60" text-anchor="middle" class="sm"><tspan class="bold">GR1</tspan>  20 / 10</text><rect x="301.0" y="71.0" width="28" height="28" class="c-hold"/><rect x="331.0" y="71.0" width="28" height="28" class="c-train"/><rect x="361.0" y="71.0" width="28" height="28" class="c-hold"/><rect x="391.0" y="71.0" width="28" height="28" class="c-train"/><rect x="421.0" y="71.0" width="28" height="28" class="c-train"/><rect x="301.0" y="101.0" width="28" height="28" class="c-train"/><rect x="331.0" y="101.0" width="28" height="28" class="c-hold"/><rect x="361.0" y="101.0" width="28" height="28" class="c-train"/><rect x="391.0" y="101.0" width="28" height="28" class="c-hold"/><rect x="421.0" y="101.0" width="28" height="28" class="c-train"/><rect x="301.0" y="131.0" width="28" height="28" class="c-train"/><rect x="331.0" y="131.0" width="28" height="28" class="c-hold"/><rect x="361.0" y="131.0" width="28" height="28" class="c-hold"/><rect x="391.0" y="131.0" width="28" height="28" class="c-train"/><rect x="421.0" y="131.0" width="28" height="28" class="c-train"/><rect x="301.0" y="161.0" width="28" height="28" class="c-hold"/><rect x="331.0" y="161.0" width="28" height="28" class="c-train"/><rect x="361.0" y="161.0" width="28" height="28" class="c-train"/><rect x="391.0" y="161.0" width="28" height="28" class="c-hold"/><rect x="421.0" y="161.0" width="28" height="28" class="c-train"/><rect x="301.0" y="191.0" width="28" height="28" class="c-train"/><rect x="331.0" y="191.0" width="28" height="28" class="c-train"/><rect x="361.0" y="191.0" width="28" height="28" class="c-train"/><rect x="391.0" y="191.0" width="28" height="28" class="c-hold"/><rect x="421.0" y="191.0" width="28" height="28" class="c-train"/><rect x="301.0" y="221.0" width="28" height="28" class="c-train"/><rect x="331.0" y="221.0" width="28" height="28" class="c-hold"/><rect x="361.0" y="221.0" width="28" height="28" class="c-train"/><rect x="391.0" y="221.0" width="28" height="28" class="c-train"/><rect x="421.0" y="221.0" width="28" height="28" class="c-train"/><text x="321.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 321.0 328.0)">left</text><text x="351.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 351.0 328.0)">right</text><text x="381.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 381.0 328.0)">front</text><text x="411.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 411.0 328.0)">behind</text><text x="441.0" y="328.0" text-anchor="end" class="sm" transform="rotate(-50 441.0 328.0)">on</text><text x="375.0" y="270" text-anchor="middle" class="sm dim">same cells in each of 12 tasks</text><text x="248.0" y="376" text-anchor="middle" class="sm dim">rows: reference relation, columns: goal relation</text><text x="470" y="22" class="bold">Training demonstrations</text><path d="M655.00 113.00A122 122 0 0 1 772.99 203.99L732.86 214.54A80 80 0 0 0 655.00 154.50Z" class="sb-base t0"/><text x="717.0" y="158.6" text-anchor="middle" class="sm">7,966</text><path d="M655.53 103.00A132 132 0 0 1 759.86 154.82L755.88 157.85A127 127 0 0 0 655.51 108.00Z" class="ring-f"/><path d="M759.78 155.54A131 131 0 0 1 782.05 201.06L778.18 202.10A127 127 0 0 0 756.59 157.96Z" class="ring-g"/><path d="M772.99 203.99A122 122 0 0 1 767.34 282.59L729.12 266.40A80 80 0 0 0 732.86 214.54Z" class="sb-vsr t1"/><text x="756.2" y="246.3" text-anchor="middle" class="sm">3,988</text><path d="M782.80 201.96A132 132 0 0 1 784.30 261.58L779.40 260.58A127 127 0 0 0 777.96 203.21Z" class="ring-f"/><path d="M783.70 262.00A131 131 0 0 1 776.29 285.81L772.60 284.26A127 127 0 0 0 779.78 261.18Z" class="ring-g"/><path d="M767.34 282.59A122 122 0 0 1 715.18 341.12L694.71 305.02A80 80 0 0 0 729.12 266.40Z" class="sb-vsr t2"/><text x="730.8" y="306.5" text-anchor="middle" class="sm">3,967</text><path d="M776.34 286.97A132 132 0 0 1 741.42 334.78L738.15 331.00A127 127 0 0 0 771.74 285.00Z" class="ring-f"/><path d="M740.69 334.74A131 131 0 0 1 720.33 349.13L718.34 345.65A127 127 0 0 0 738.09 331.71Z" class="ring-g"/><path d="M715.18 341.12A122 122 0 0 1 637.85 355.79L643.69 314.70A80 80 0 0 0 694.71 305.02Z" class="sb-ssu t1"/><text x="673.9" y="338.7" text-anchor="middle" class="sm">3,983</text><path d="M719.66 350.08A132 132 0 0 1 662.51 366.79L662.22 361.79A127 127 0 0 0 717.21 345.72Z" class="ring-f"/><path d="M661.95 366.32A131 131 0 0 1 637.04 365.27L637.59 361.31A127 127 0 0 0 661.74 362.32Z" class="ring-g"/><path d="M637.85 355.79A122 122 0 0 1 573.59 325.86L601.28 294.95A80 80 0 0 0 643.69 314.70Z" class="sb-ssu t2"/><text x="612.2" y="331.0" text-anchor="middle" class="sm">3,575</text><path d="M635.93 365.61A132 132 0 0 1 587.96 348.71L590.50 344.40A127 127 0 0 0 636.65 360.67Z" class="ring-f"/><path d="M587.76 348.01A131 131 0 0 1 567.64 333.29L570.30 330.30A127 127 0 0 0 589.81 344.57Z" class="ring-g"/><path d="M573.59 325.86A122 122 0 0 1 536.72 264.88L576.95 254.72A80 80 0 0 0 601.28 294.95Z" class="sb-ocd t1"/><text x="568.1" y="291.5" text-anchor="middle" class="sm">3,594</text><path d="M566.52 332.96A132 132 0 0 1 535.88 291.86L540.39 289.71A127 127 0 0 0 569.87 329.25Z" class="ring-f"/><path d="M536.10 291.17A131 131 0 0 1 527.64 267.72L531.51 266.72A127 127 0 0 0 539.72 289.47Z" class="ring-g"/><path d="M536.72 264.88A122 122 0 0 1 540.00 194.28L579.12 208.13A80 80 0 0 0 576.95 254.72Z" class="sb-ocd t2"/><text x="553.6" y="234.3" text-anchor="middle" class="sm">3,564</text><path d="M526.89 266.82A132 132 0 0 1 524.34 216.27L529.29 216.98A127 127 0 0 0 531.75 265.62Z" class="ring-f"/><path d="M524.91 215.82A131 131 0 0 1 530.87 191.60L534.64 192.92A127 127 0 0 0 528.86 216.40Z" class="ring-g"/><path d="M540.00 194.28A122 122 0 0 1 587.10 133.64L610.20 168.12A80 80 0 0 0 579.12 208.13Z" class="sb-scr t1"/><text x="574.8" y="176.7" text-anchor="middle" class="sm">3,882</text><path d="M530.75 190.44A132 132 0 0 1 561.40 141.92L564.95 145.45A127 127 0 0 0 535.45 192.13Z" class="ring-f"/><path d="M562.13 141.90A131 131 0 0 1 581.37 126.04L583.61 129.36A127 127 0 0 0 564.96 144.73Z" class="ring-g"/><path d="M587.10 133.64A122 122 0 0 1 655.00 113.00L655.00 154.50A80 80 0 0 0 610.20 168.12Z" class="sb-scr t2"/><text x="625.5" y="141.9" text-anchor="middle" class="sm">3,579</text><path d="M581.97 125.04A132 132 0 0 1 629.05 105.58L630.03 110.48A127 127 0 0 0 584.74 129.21Z" class="ring-f"/><path d="M629.66 105.96A131 131 0 0 1 654.47 103.50L654.49 107.50A127 127 0 0 0 630.43 109.89Z" class="ring-g"/><path d="M655.00 155.00A80 80 0 0 1 732.37 214.66L694.17 224.70A40 40 0 0 0 655.00 194.50Z" class="sb-base t3"/><text x="691.9" y="191.1" text-anchor="middle" class="sm wh bold">Base</text><path d="M732.37 214.66A80 80 0 0 1 694.46 304.59L674.98 270.23A40 40 0 0 0 694.17 224.70Z" class="sb-vsr t3"/><text x="710.7" y="262.5" text-anchor="middle" class="sm wh bold">VSR</text><path d="M694.46 304.59A80 80 0 0 1 601.61 294.58L627.97 265.16A40 40 0 0 0 674.98 270.23Z" class="sb-ssu t3"/><text x="648.5" y="299.2" text-anchor="middle" class="sm wh bold">SSU</text><path d="M601.61 294.58A80 80 0 0 1 579.59 208.30L616.82 221.48A40 40 0 0 0 627.97 265.16Z" class="sb-ocd t3"/><text x="596.4" y="254.0" text-anchor="middle" class="sm wh bold">OCD</text><path d="M579.59 208.30A80 80 0 0 1 655.00 155.00L655.00 194.50A40 40 0 0 0 616.82 221.48Z" class="sb-scr t3"/><text x="620.1" y="189.6" text-anchor="middle" class="sm wh bold">SCR</text><text x="655" y="237" text-anchor="middle" class="bold">38,098</text><text x="655" y="253" text-anchor="middle" class="sm">demos</text><rect x="560" y="392" width="14" height="10" class="ring-f"/><text x="580" y="401" class="sm">Franka 26,098</text><rect x="680" y="392" width="14" height="10" class="ring-g"/><text x="700" y="401" class="sm">GR1 12,000</text><text x="60" y="428" class="bold dtx-vsr">Visual 20.9%</text><text x="260" y="428" class="bold dtx-ssu">Semantic 19.8%</text><text x="460" y="428" class="bold dtx-ocd">Distance 18.8%</text><text x="630" y="428" class="bold dtx-scr">Configuration 19.6%</text><rect x="60" y="440" width="14" height="12" class="sb-vsr t1"/><text x="79" y="451" class="sm">background</text><rect x="174" y="440" width="14" height="12" class="sb-vsr t2"/><text x="193" y="451" class="sm">clutter</text><rect x="260" y="440" width="14" height="12" class="sb-ssu t1"/><text x="279" y="451" class="sm">synonym</text><rect x="350" y="440" width="14" height="12" class="sb-ssu t2"/><text x="369" y="451" class="sm">flip</text><rect x="460" y="440" width="14" height="12" class="sb-ocd t1"/><text x="479" y="451" class="sm">near gap</text><rect x="558" y="440" width="14" height="12" class="sb-ocd t2"/><text x="577" y="451" class="sm">far gap</text><rect x="630" y="440" width="14" height="12" class="sb-scr t1"/><text x="649" y="451" class="sm">extra</text><rect x="704" y="440" width="14" height="12" class="sb-scr t2"/><text x="723" y="451" class="sm">anchor move</text></svg></div>
+<figcaption>Left: training and held-out relation cells (rows: reference relation, columns: goal relation). Right: 38,098 training demonstrations by dimension, sub-factor and embodiment.</figcaption>
+</figure>
           </div>
         </div>
       </div>
@@ -198,10 +636,23 @@
             </div>
           </div>
           <div class="split-col">
-            <figure class="figure">
-              <img src="static/images/gr1_tasks.jpg" alt="The twelve GR1 tasks on RoboCasa kitchen counters, each with three identical cans and three containers; the target can is ringed in green." width="1024" height="768" loading="lazy" class="zoomable">
-              <figcaption>The twelve Robo3DSG-GR1 tasks (target can ringed in green).</figcaption>
-            </figure>
+            <figure class="figure hfig " data-zoom role="group" aria-label="The twelve GR1 tasks, one scene each; target can ringed in green">
+<div class="hfig-body fc" data-w="552"><div class="fc-in"><div class="tile-grid tg-4">
+<figure class="tile"><img src="static/images/gr1_tasks/00.jpg" alt="CuttingboardToPan scene" width="256" height="233" loading="lazy"><figcaption>CuttingboardToPan</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/01.jpg" alt="CuttingboardToPot scene" width="256" height="233" loading="lazy"><figcaption>CuttingboardToPot</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/02.jpg" alt="CuttingboardToCardboardBox scene" width="256" height="233" loading="lazy"><figcaption>CuttingboardToCardboardBox</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/03.jpg" alt="PlacematToBowl scene" width="256" height="233" loading="lazy"><figcaption>PlacematToBowl</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/04.jpg" alt="PlacematToPlate scene" width="256" height="234" loading="lazy"><figcaption>PlacematToPlate</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/05.jpg" alt="PlateToBowl scene" width="256" height="234" loading="lazy"><figcaption>PlateToBowl</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/06.jpg" alt="PlateToPan scene" width="256" height="234" loading="lazy"><figcaption>PlateToPan</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/07.jpg" alt="PlateToPlate scene" width="256" height="234" loading="lazy"><figcaption>PlateToPlate</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/08.jpg" alt="PlateToCardboardBox scene" width="256" height="234" loading="lazy"><figcaption>PlateToCardboardBox</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/09.jpg" alt="TrayToPlate scene" width="256" height="234" loading="lazy"><figcaption>TrayToPlate</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/10.jpg" alt="TrayToPot scene" width="256" height="234" loading="lazy"><figcaption>TrayToPot</figcaption></figure>
+<figure class="tile"><img src="static/images/gr1_tasks/11.jpg" alt="TrayToCardboardBox scene" width="256" height="234" loading="lazy"><figcaption>TrayToCardboardBox</figcaption></figure>
+</div></div></div>
+<figcaption>The twelve Robo3DSG-GR1 tasks (target can ringed in green).</figcaption>
+</figure>
           </div>
         </div>
       </div>
@@ -212,20 +663,22 @@
         <h2 class="section-title">Every Trajectory is a Hierarchical 3D Scene Graph</h2>
         <p class="body-text narrow">Every layout, demonstration step, and evaluated rollout carries a directed 3D scene graph. Object nodes store identity, pose, size and bounding-box centres; relation edges store directional offsets, footprint gaps and centre distances. Three tiers organise six layers (site/task, areas, zones, places, objects, end-effectors): <em>T<sub>1</sub></em> splits the task into selection and placement and resolves the target, <em>T<sub>2</sub></em> groups candidates by anchor and flags cross-anchor traps, <em>T<sub>3</sub></em> attaches the metric geometry, the goal and the end-effector trajectory. Snapshots are recorded at 20 Hz with persistent identities. One representation <strong>defines the task, scores the rollout, and provides supervision targets</strong>. Policies receive only images, the instruction and the robot state.</p>
 
-        <figure class="figure figure-wide">
-          <img src="static/images/scene_graph.png" alt="(a) The layered graph at one transport step; (b) one graph per control step, with reference, holding and goal edges appearing and disappearing as the bowl moves; (c) what each edge provides: metric values, text targets and verified checks." width="1600" height="830" loading="lazy" class="zoomable">
-          <figcaption>(a) Three tiers connect task structure to objects and the gripper trajectory. (b) Reference, holding, and goal edges track manipulation with measured spatial values. (c) Each edge supplies scoring measurements and serialised supervision targets.</figcaption>
-        </figure>
+        <figure class="figure hfig figure-wide" data-zoom role="group" aria-label="Scene graph figure">
+<div class="hfig-body sg-scroll"><svg class="sg-svg" viewBox="0 0 504 277.2" role="img" aria-label="Scene graph: (a) the layered graph at one transport step; (b) one graph per control step; (c) what the graph gives (metric edge values, text targets, verified checks)"><image href="static/images/scene_graph_raw.jpg" x="0" y="0" width="504" height="277.2"/><text x="0.00" y="271.73" font-size="6.33" fill="#52514e" class="sg-sans" textLength="200.33" lengthAdjust="spacingAndGlyphs">Objects (8) + gripper (160 poses): point clouds, boxes, poses, contacts</text><text x="19.33" y="215.80" font-size="6.00" fill="#1baf7a" class="sg-sans b" textLength="49.00" lengthAdjust="spacingAndGlyphs">holding bowl id 1</text><text x="34.33" y="254.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="20.67" lengthAdjust="spacingAndGlyphs">ramekin</text><text x="30.33" y="241.53" font-size="5.67" fill="#0b0b0b" class="sg-sans b" textLength="24.67" lengthAdjust="spacingAndGlyphs">bowl id 1</text><text x="42.33" y="231.20" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="12.67" lengthAdjust="spacingAndGlyphs">plate</text><text x="137.67" y="257.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="23.00" lengthAdjust="spacingAndGlyphs">bowl id 2</text><text x="137.67" y="247.20" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="27.67" lengthAdjust="spacingAndGlyphs">cookie box</text><text x="137.67" y="237.20" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="23.00" lengthAdjust="spacingAndGlyphs">bowl id 3</text><text x="69.00" y="152.20" font-size="5.67" fill="#7a5600" class="sg-sans b" textLength="31.33" lengthAdjust="spacingAndGlyphs">goal region</text><text x="108.33" y="123.13" font-size="6.00" fill="#0b0b0b" class="sg-sans b" textLength="31.33" lengthAdjust="spacingAndGlyphs">cookie box</text><text x="104.33" y="132.60" font-size="5.33" fill="#2a78d6" class="sg-sans" textLength="39.33" lengthAdjust="spacingAndGlyphs">reference anchor</text><text x="80.00" y="129.80" font-size="6.00" fill="#0b0b0b" class="sg-sans b" textLength="23.00" lengthAdjust="spacingAndGlyphs">ramekin</text><text x="81.00" y="138.93" font-size="5.33" fill="#8a8984" class="sg-sans" textLength="21.33" lengthAdjust="spacingAndGlyphs">distractor</text><text x="59.00" y="107.47" font-size="6.00" fill="#0b0b0b" class="sg-sans b" textLength="14.00" lengthAdjust="spacingAndGlyphs">plate</text><text x="52.33" y="116.93" font-size="5.33" fill="#eb6834" class="sg-sans" textLength="27.33" lengthAdjust="spacingAndGlyphs">goal anchor</text><text x="108.33" y="72.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="20.67" lengthAdjust="spacingAndGlyphs">tabletop</text><text x="143.00" y="73.20" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="28.33" lengthAdjust="spacingAndGlyphs">cabinet top</text><text x="108.00" y="55.20" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="23.67" lengthAdjust="spacingAndGlyphs">stove top</text><text x="101.33" y="25.47" font-size="6.00" fill="#0b0b0b" class="sg-sans b" textLength="36.00" lengthAdjust="spacingAndGlyphs">scene + task</text><text x="62.67" y="35.27" font-size="5.33" fill="#6250d6" class="sg-sans" textLength="113.67" lengthAdjust="spacingAndGlyphs">select(right of, cookie box) → place(left of, plate)</text><text x="18.00" y="174.27" font-size="7.00" fill="#0b0b0b" class="sg-sans" textLength="35.33" lengthAdjust="spacingAndGlyphs">Places (15)</text><text x="185.33" y="165.72" font-size="6.65" fill="#eb6834" class="sg-math">T</text><text x="188.67" y="166.93" font-size="4.33" fill="#eb6834" class="sg-sub" textLength="3.00" lengthAdjust="spacingAndGlyphs">3</text><text x="185.33" y="174.07" font-size="6.33" fill="#eb6834" class="sg-sans" textLength="17.33" lengthAdjust="spacingAndGlyphs">metric</text><text x="185.33" y="180.73" font-size="6.33" fill="#eb6834" class="sg-sans" textLength="26.67" lengthAdjust="spacingAndGlyphs">geometry</text><text x="23.67" y="126.27" font-size="7.00" fill="#0b0b0b" class="sg-sans" textLength="30.00" lengthAdjust="spacingAndGlyphs">Zones (3)</text><text x="185.33" y="118.39" font-size="6.65" fill="#008300" class="sg-math">T</text><text x="188.67" y="119.60" font-size="4.33" fill="#008300" class="sg-sub" textLength="3.00" lengthAdjust="spacingAndGlyphs">2</text><text x="185.33" y="126.07" font-size="6.33" fill="#008300" class="sg-sans" textLength="19.67" lengthAdjust="spacingAndGlyphs">anchor</text><text x="185.33" y="132.73" font-size="6.33" fill="#008300" class="sg-sans" textLength="17.00" lengthAdjust="spacingAndGlyphs">zones</text><text x="24.67" y="78.60" font-size="7.00" fill="#0b0b0b" class="sg-sans" textLength="28.67" lengthAdjust="spacingAndGlyphs">Areas (3)</text><text x="31.00" y="30.93" font-size="7.00" fill="#0b0b0b" class="sg-sans" textLength="22.67" lengthAdjust="spacingAndGlyphs">Site (1)</text><text x="185.33" y="22.72" font-size="6.65" fill="#6250d6" class="sg-math">T</text><text x="188.67" y="23.93" font-size="4.33" fill="#6250d6" class="sg-sub" textLength="3.00" lengthAdjust="spacingAndGlyphs">1</text><text x="185.33" y="30.73" font-size="6.33" fill="#6250d6" class="sg-sans" textLength="35.33" lengthAdjust="spacingAndGlyphs">global frame</text><text x="185.33" y="37.40" font-size="6.33" fill="#6250d6" class="sg-sans" textLength="17.33" lengthAdjust="spacingAndGlyphs">+ task</text><text x="247.00" y="75.47" font-size="6.00" fill="#2a78d6" class="sg-sans b" textLength="44.33" lengthAdjust="spacingAndGlyphs">right of · 4.6 cm</text><text x="245.33" y="27.07" font-size="6.33" fill="#52514e" class="sg-sans" textLength="48.00" lengthAdjust="spacingAndGlyphs">step 0 · approach</text><text x="310.33" y="75.47" font-size="6.00" fill="#1baf7a" class="sg-sans b" textLength="21.67" lengthAdjust="spacingAndGlyphs">holding</text><text x="300.67" y="27.07" font-size="6.33" fill="#52514e" class="sg-sans" textLength="41.00" lengthAdjust="spacingAndGlyphs">step 59 · grasp</text><text x="362.00" y="75.47" font-size="6.00" fill="#1baf7a" class="sg-sans b" textLength="21.67" lengthAdjust="spacingAndGlyphs">holding</text><text x="348.00" y="27.07" font-size="6.33" fill="#52514e" class="sg-sans" textLength="50.00" lengthAdjust="spacingAndGlyphs">step 82 · transport</text><text x="404.67" y="75.47" font-size="6.00" fill="#eb6834" class="sg-sans b" textLength="40.00" lengthAdjust="spacingAndGlyphs">left of · 4.8 cm</text><text x="400.33" y="27.07" font-size="6.33" fill="#52514e" class="sg-sans" textLength="49.33" lengthAdjust="spacingAndGlyphs">step 105 · release</text><text x="456.67" y="75.47" font-size="6.00" fill="#eb6834" class="sg-sans b" textLength="40.00" lengthAdjust="spacingAndGlyphs">left of · 4.7 cm</text><text x="456.67" y="27.07" font-size="6.33" fill="#52514e" class="sg-sans" textLength="40.33" lengthAdjust="spacingAndGlyphs">step 159 · final</text><text x="248.67" y="128.73" font-size="6.33" fill="#ffffff" class="sg-sans b" textLength="57.67" lengthAdjust="spacingAndGlyphs">metric edge values</text><text x="273.00" y="159.07" font-size="6.33" fill="#2a78d6" class="sg-sans b" textLength="23.67" lengthAdjust="spacingAndGlyphs">right_of</text><text x="251.00" y="187.87" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="23.00" lengthAdjust="spacingAndGlyphs">bowl id 1</text><text x="288.00" y="187.87" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="38.67" lengthAdjust="spacingAndGlyphs">cookie box id 4</text><text x="249.33" y="204.20" font-size="5.67" fill="#52514e" class="sg-sans" textLength="21.00" lengthAdjust="spacingAndGlyphs">axis gap</text><text x="304.67" y="204.20" font-size="5.67" fill="#0b0b0b" class="sg-sans b" textLength="17.33" lengthAdjust="spacingAndGlyphs">4.6 cm</text><text x="249.33" y="216.20" font-size="5.67" fill="#52514e" class="sg-sans" textLength="22.33" lengthAdjust="spacingAndGlyphs">3D offset</text><text x="273.33" y="216.00" font-size="5.00" fill="#0b0b0b" class="sg-sans b" textLength="49.00" lengthAdjust="spacingAndGlyphs">(+2.9, +13.7, +1.5) cm</text><text x="249.33" y="227.87" font-size="5.67" fill="#52514e" class="sg-sans" textLength="36.00" lengthAdjust="spacingAndGlyphs">3D centre dist.</text><text x="301.33" y="227.87" font-size="5.67" fill="#0b0b0b" class="sg-sans b" textLength="20.67" lengthAdjust="spacingAndGlyphs">14.1 cm</text><text x="249.33" y="239.87" font-size="5.67" fill="#52514e" class="sg-sans" textLength="31.00" lengthAdjust="spacingAndGlyphs">footprint gap</text><text x="304.67" y="239.87" font-size="5.67" fill="#0b0b0b" class="sg-sans b" textLength="17.33" lengthAdjust="spacingAndGlyphs">4.5 cm</text><text x="249.33" y="251.87" font-size="5.67" fill="#52514e" class="sg-sans" textLength="13.33" lengthAdjust="spacingAndGlyphs">holds</text><text x="290.33" y="251.87" font-size="5.67" fill="#0b0b0b" class="sg-sans b" textLength="31.67" lengthAdjust="spacingAndGlyphs">step 0 → lift</text><text x="336.33" y="128.73" font-size="6.33" fill="#ffffff" class="sg-sans b" textLength="34.33" lengthAdjust="spacingAndGlyphs">text targets</text><text x="336.33" y="146.67" font-size="4.33" fill="#8a8984" class="sg-mono" textLength="34.33" lengthAdjust="spacingAndGlyphs">&lt;scene_graph&gt;</text><text x="336.33" y="153.67" font-size="4.33" fill="#6250d6" class="sg-mono" textLength="53.00" lengthAdjust="spacingAndGlyphs">T1: select(right_of,</text><text x="336.33" y="161.00" font-size="4.33" fill="#6250d6" class="sg-mono" textLength="45.00" lengthAdjust="spacingAndGlyphs">      cookie_box)</text><text x="336.33" y="168.00" font-size="4.33" fill="#6250d6" class="sg-mono" textLength="55.67" lengthAdjust="spacingAndGlyphs">    -&gt; place(left_of,</text><text x="336.33" y="175.33" font-size="4.33" fill="#6250d6" class="sg-mono" textLength="31.67" lengthAdjust="spacingAndGlyphs">      plate)</text><text x="336.33" y="182.33" font-size="4.33" fill="#008300" class="sg-mono" textLength="58.33" lengthAdjust="spacingAndGlyphs">T2: cookie_box[bowl_1:</text><text x="336.33" y="189.67" font-size="4.33" fill="#008300" class="sg-mono" textLength="63.67" lengthAdjust="spacingAndGlyphs">      right_of, next_to]</text><text x="336.33" y="196.67" font-size="4.33" fill="#008300" class="sg-mono" textLength="58.33" lengthAdjust="spacingAndGlyphs">    -&gt; target = bowl_1</text><text x="336.33" y="204.00" font-size="4.33" fill="#8a8984" class="sg-mono" textLength="37.00" lengthAdjust="spacingAndGlyphs">&lt;/scene_graph&gt;</text><text x="336.33" y="211.33" font-size="4.33" fill="#8a8984" class="sg-mono" textLength="66.33" lengthAdjust="spacingAndGlyphs">&lt;metric&gt;  (x, y, z) world</text><text x="336.33" y="218.33" font-size="4.33" fill="#eb6834" class="sg-mono" textLength="69.00" lengthAdjust="spacingAndGlyphs">bowl_1 = [8.2,11.9,92.5]cm</text><text x="336.33" y="225.67" font-size="4.33" fill="#eb6834" class="sg-mono" textLength="74.00" lengthAdjust="spacingAndGlyphs">cookie_box=[5.3,-1.8,90.9]cm</text><text x="336.33" y="232.67" font-size="4.33" fill="#eb6834" class="sg-mono" textLength="66.33" lengthAdjust="spacingAndGlyphs">offset(bowl_1,cookie_box)</text><text x="336.33" y="240.00" font-size="4.33" fill="#eb6834" class="sg-mono" textLength="58.33" lengthAdjust="spacingAndGlyphs">  =(+2.9,+13.7,+1.5)cm</text><text x="336.33" y="247.00" font-size="4.33" fill="#eb6834" class="sg-mono" textLength="74.00" lengthAdjust="spacingAndGlyphs">gap(bowl_1,cookie_box)=4.5cm</text><text x="336.33" y="254.33" font-size="4.33" fill="#8a8984" class="sg-mono" textLength="24.00" lengthAdjust="spacingAndGlyphs">&lt;/metric&gt;</text><text x="424.00" y="128.73" font-size="6.33" fill="#ffffff" class="sg-sans b" textLength="60.00" lengthAdjust="spacingAndGlyphs">verified · explorable</text><text x="424.67" y="146.67" font-size="5.67" fill="#008300" class="sg-sans b" textLength="4.67" lengthAdjust="spacingAndGlyphs">✓</text><text x="432.00" y="146.40" font-size="4.67" fill="#0b0b0b" class="sg-sans" textLength="43.33" lengthAdjust="spacingAndGlyphs">one parent per node</text><text x="424.67" y="154.33" font-size="5.67" fill="#008300" class="sg-sans b" textLength="4.67" lengthAdjust="spacingAndGlyphs">✓</text><text x="432.00" y="154.07" font-size="4.67" fill="#0b0b0b" class="sg-sans" textLength="50.00" lengthAdjust="spacingAndGlyphs">unique referent = target</text><text x="424.67" y="162.00" font-size="5.67" fill="#008300" class="sg-sans b" textLength="4.67" lengthAdjust="spacingAndGlyphs">✓</text><text x="432.00" y="161.73" font-size="4.67" fill="#0b0b0b" class="sg-sans" textLength="60.67" lengthAdjust="spacingAndGlyphs">goal edge = scored outcome</text><text x="424.67" y="169.67" font-size="5.67" fill="#008300" class="sg-sans b" textLength="4.67" lengthAdjust="spacingAndGlyphs">✓</text><text x="432.00" y="169.40" font-size="4.67" fill="#0b0b0b" class="sg-sans" textLength="52.00" lengthAdjust="spacingAndGlyphs">holding = simulator flags</text><text x="436.33" y="250.13" font-size="4.33" fill="#1baf7a" class="sg-sans b" textLength="15.00" lengthAdjust="spacingAndGlyphs">holding</text><text x="436.33" y="258.13" font-size="4.33" fill="#52514e" class="sg-sans" textLength="13.00" lengthAdjust="spacingAndGlyphs">gripper</text><text x="432.67" y="203.20" font-size="4.00" fill="#52514e" class="sg-sans" textLength="18.67" lengthAdjust="spacingAndGlyphs">cookie box</text><text x="468.33" y="203.20" font-size="4.00" fill="#52514e" class="sg-sans" textLength="14.00" lengthAdjust="spacingAndGlyphs">ramekin</text><text x="456.33" y="203.20" font-size="4.00" fill="#52514e" class="sg-sans" textLength="8.33" lengthAdjust="spacingAndGlyphs">plate</text><text x="447.33" y="189.20" font-size="4.00" fill="#52514e" class="sg-sans" textLength="14.00" lengthAdjust="spacingAndGlyphs">tabletop</text><text x="476.33" y="189.20" font-size="4.00" fill="#52514e" class="sg-sans" textLength="23.33" lengthAdjust="spacingAndGlyphs">cabinet stove</text><text x="430.67" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans b" textLength="2.33" lengthAdjust="spacingAndGlyphs">1</text><text x="439.33" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans" textLength="14.33" lengthAdjust="spacingAndGlyphs">2 3 4</text><text x="474.33" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans" textLength="2.33" lengthAdjust="spacingAndGlyphs">5</text><text x="459.67" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans" textLength="2.33" lengthAdjust="spacingAndGlyphs">6</text><text x="481.67" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans" textLength="2.33" lengthAdjust="spacingAndGlyphs">7</text><text x="494.00" y="244.20" font-size="4.00" fill="#0b0b0b" class="sg-sans" textLength="2.33" lengthAdjust="spacingAndGlyphs">8</text><text x="449.67" y="174.87" font-size="4.00" fill="#52514e" class="sg-sans" textLength="22.00" lengthAdjust="spacingAndGlyphs">scene + task</text><text x="422.33" y="179.60" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="6.00" lengthAdjust="spacingAndGlyphs">site</text><text x="422.33" y="193.60" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="7.67" lengthAdjust="spacingAndGlyphs">area</text><text x="422.33" y="207.93" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="8.33" lengthAdjust="spacingAndGlyphs">zone</text><text x="422.33" y="221.93" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="9.00" lengthAdjust="spacingAndGlyphs">place</text><text x="422.33" y="238.93" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="6.00" lengthAdjust="spacingAndGlyphs">obj.</text><text x="422.33" y="257.60" font-size="3.67" fill="#8a8984" class="sg-sans" textLength="6.33" lengthAdjust="spacingAndGlyphs">ego</text><text x="423.67" y="264.87" font-size="4.00" fill="#8a8984" class="sg-sans" textLength="74.00" lengthAdjust="spacingAndGlyphs">persistent IDs · viewer: play · orbit · inspect</text><text x="4.00" y="7.53" font-size="7.33" fill="#0b0b0b" class="sg-sans" textLength="135.67" lengthAdjust="spacingAndGlyphs">(a) the layered graph at step 82 (transport)</text><text x="244.33" y="7.53" font-size="7.33" fill="#0b0b0b" class="sg-sans" textLength="252.00" lengthAdjust="spacingAndGlyphs">(b) one graph per control step: edges appear and disappear as the bowl moves</text><text x="244.33" y="110.87" font-size="7.33" fill="#0b0b0b" class="sg-sans" textLength="76.67" lengthAdjust="spacingAndGlyphs">(c) what the graph gives</text><text x="251.00" y="99.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="39.00" lengthAdjust="spacingAndGlyphs">reference edge</text><text x="303.67" y="99.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="33.33" lengthAdjust="spacingAndGlyphs">holding edge</text><text x="350.67" y="99.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="25.33" lengthAdjust="spacingAndGlyphs">goal edge</text><text x="390.00" y="99.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="28.67" lengthAdjust="spacingAndGlyphs">goal region</text><text x="432.67" y="99.53" font-size="5.67" fill="#0b0b0b" class="sg-sans" textLength="31.00" lengthAdjust="spacingAndGlyphs">gripper path</text></svg></div>
+<figcaption>(a) Three tiers connect task structure to objects and the gripper trajectory. (b) Reference, holding, and goal edges track manipulation with measured spatial values. (c) Each edge supplies scoring measurements and serialised supervision targets.</figcaption>
+</figure>
 
         <div class="split split-video">
           <div class="split-col">
             <div class="video-frame">
-              <video class="lazy-video" muted loop playsinline preload="none" data-src="static/videos/scene_graph_trajectory.mp4" aria-label="Animated scene-graph trajectory of one Franka demonstration"></video>
+              <p class="vid-title"><strong>Franka arm</strong> &ldquo;pick up the black bowl right of the cookie box and place it left of the plate&rdquo;</p>
+              <div class="fc" data-w="578"><div class="fc-in"><video class="lazy-video" muted loop playsinline preload="none" width="640" height="542" poster="static/images/posters/teaser_franka.jpg" data-src="static/videos/scene_graph_trajectory.mp4" aria-label="Animated scene-graph trajectory of one Franka demonstration"></video>
+              <ul class="tl-legend" aria-label="Timeline rows, top to bottom"><li><b>Phase</b><span class="chip-ph"><i style="background:#9aa5b3"></i>approach</span><span class="chip-ph"><i style="background:#e34948"></i>grasp</span><span class="chip-ph"><i style="background:#1baf7a"></i>transport</span><span class="chip-ph"><i style="background:#eb6834"></i>place</span><span class="chip-ph"><i style="background:#c5ccd4"></i>retreat</span></li><li><i class="sw-r" style="background:#3e79d6"></i>bowl 1 right of cookie box</li><li><i class="sw-r" style="background:#1baf7a"></i>gripper holding bowl 1</li><li><i class="sw-r" style="background:#eb6834"></i>bowl 1 left of plate</li><li class="tl-note"><i class="sw-r sw-cur"></i>current control step (20 Hz), 0 to 160</li></ul></div></div>
             </div>
           </div>
           <div class="split-col">
             <h3 class="sub-title left">The graph over time</h3>
-            <p class="body-text small-text">One Franka demonstration (&ldquo;pick up the black bowl right of the cookie box and place it left of the plate&rdquo;) replayed from its scene graph. The <span class="kw-ref">reference edge</span> identifies the target until the grasp, the <span class="kw-hold">holding edge</span> records grasp and transport, and the <span class="kw-goal">goal edge</span> becomes true at release. The timeline below the scene shows every edge per control step and the measured gap to the goal anchor in cm.</p>
+            <p class="body-text small-text">One Franka demonstration (&ldquo;pick up the black bowl right of the cookie box and place it left of the plate&rdquo;) replayed from its scene graph. The <span class="kw-ref">reference edge</span> identifies the target until the grasp, the <span class="kw-hold">holding edge</span> records grasp and transport, and the <span class="kw-goal">goal edge</span> becomes true at release. The timeline below the scene shows when every task edge holds, per control step.</p>
             <p class="body-text small-text">Rollouts are scored from the same graph: a rollout counts only if the <strong>first object lifted is the target</strong>, the target <strong>ends in the goal relation</strong>, and <strong>no other object is disturbed</strong>.</p>
           </div>
         </div>
@@ -264,87 +717,87 @@
         <div class="gallery" id="gallery-grid">
           <!-- Franka demonstrations -->
           <figure class="clip" data-robot="franka" data-dim="base" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_clean.jpg" data-src="static/videos/franka/clean.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_clean.jpg" data-src="static/videos/franka/clean.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl left of the plate and place it right of the cookie box&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="vsr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_background.jpg" data-src="static/videos/franka/background.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_background.jpg" data-src="static/videos/franka/background.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-vsr">VSR &middot; background</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl between the plate and the cookie box and place it in front of the ramekin&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="vsr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_clutter.jpg" data-src="static/videos/franka/clutter.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_clutter.jpg" data-src="static/videos/franka/clutter.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-vsr">VSR &middot; clutter</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl on the cookie box and place it right of the plate&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="ssu" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_synonym.jpg" data-src="static/videos/franka/synonym.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_synonym.jpg" data-src="static/videos/franka/synonym.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ssu">SSU &middot; synonym</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl that is in front of the ramekin and place it behind the plate&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="ssu" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_flip.jpg" data-src="static/videos/franka/flip.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_flip.jpg" data-src="static/videos/franka/flip.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ssu">SSU &middot; flip</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl left of the cookie box and place it behind the ramekin&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="ocd" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_near.jpg" data-src="static/videos/franka/gap_near.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_near.jpg" data-src="static/videos/franka/gap_near.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ocd">OCD &middot; near gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl nearest to the ramekin and place it behind the plate&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="ocd" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_far.jpg" data-src="static/videos/franka/gap_far.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_gap_far.jpg" data-src="static/videos/franka/gap_far.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-ocd">OCD &middot; far gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl in front of the ramekin and place it on the plate&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="scr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_extra_bowl.jpg" data-src="static/videos/franka/extra_bowl.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_extra_bowl.jpg" data-src="static/videos/franka/extra_bowl.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-scr">SCR &middot; extra bowl</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl right of the ramekin and place it in front of the cookie box&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="scr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/franka_anchor_move.jpg" data-src="static/videos/franka/anchor_move.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/franka_anchor_move.jpg" data-src="static/videos/franka/anchor_move.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-scr">SCR &middot; anchor move</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the black bowl next to the plate and place it on the ramekin&rdquo;</span></figcaption>
           </figure>
 
           <!-- GR1 demonstrations -->
           <figure class="clip" data-robot="gr1" data-dim="base" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_clean.jpg" data-src="static/videos/gr1/clean.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_clean.jpg" data-src="static/videos/gr1/clean.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-base">Baseline</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can closest to the plate and place it on the plate&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="vsr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_background.jpg" data-src="static/videos/gr1/background.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_background.jpg" data-src="static/videos/gr1/background.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-vsr">VSR &middot; background</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the pot and place it in front of the pot&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="vsr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_clutter.jpg" data-src="static/videos/gr1/clutter.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_clutter.jpg" data-src="static/videos/gr1/clutter.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-vsr">VSR &middot; clutter</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can between the tray and the bowl and place it behind the pot&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="ssu" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_synonym.jpg" data-src="static/videos/gr1/synonym.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_synonym.jpg" data-src="static/videos/gr1/synonym.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ssu">SSU &middot; synonym</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can on the left side of the pan and place it on the right side of the pan&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="ssu" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_flip.jpg" data-src="static/videos/gr1/flip.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_flip.jpg" data-src="static/videos/gr1/flip.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ssu">SSU &middot; flip</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the cutting board and place it in the pan&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="ocd" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_near.jpg" data-src="static/videos/gr1/gap_near.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_near.jpg" data-src="static/videos/gr1/gap_near.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ocd">OCD &middot; near gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the bowl and place it in front of the bowl&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="ocd" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_far.jpg" data-src="static/videos/gr1/gap_far.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_gap_far.jpg" data-src="static/videos/gr1/gap_far.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-ocd">OCD &middot; far gap</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the cardboard box and place it in the cardboard box&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="scr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_extra_can.jpg" data-src="static/videos/gr1/extra_can.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_extra_can.jpg" data-src="static/videos/gr1/extra_can.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-scr">SCR &middot; extra can</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can to the right of the cardboard box and place it in the cardboard box&rdquo;</span></figcaption>
           </figure>
           <figure class="clip" data-robot="gr1" data-dim="scr" data-kind="demo">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/gr1_anchor_move.jpg" data-src="static/videos/gr1/anchor_move.mp4"></video>
+            <video class="lazy-video ar-gr1" width="512" height="320" muted loop playsinline preload="none" poster="static/images/posters/gr1_anchor_move.jpg" data-src="static/videos/gr1/anchor_move.mp4"></video>
             <figcaption><span class="tag tag-robot">GR1</span><span class="tag tag-scr">SCR &middot; anchor move</span><span class="tag tag-kind">demo</span><span class="instr">&ldquo;pick up the can behind the plate and place it on the plate&rdquo;</span></figcaption>
           </figure>
 
           <!-- Zero-shot rollouts (released LIBERO checkpoint, Franka) -->
           <figure class="clip" data-robot="franka" data-dim="base" data-kind="rollout">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_wrong_bowl.jpg" data-src="static/videos/rollouts/zeroshot_wrong_bowl.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_wrong_bowl.jpg" data-src="static/videos/rollouts/zeroshot_wrong_bowl.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-fail">zero-shot &middot; fail: wrong bowl</span><span class="instr">&pi;<sub>0.5</sub>, released LIBERO checkpoint. &ldquo;pick up the black bowl behind the cookie box and place it right of the plate&rdquo;: the first bowl lifted is not the target.</span></figcaption>
           </figure>
           <figure class="clip" data-robot="franka" data-dim="base" data-kind="rollout">
-            <video class="lazy-video" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_no_place.jpg" data-src="static/videos/rollouts/zeroshot_no_place.mp4"></video>
+            <video class="lazy-video ar-sq" width="384" height="384" muted loop playsinline preload="none" poster="static/images/posters/rollouts_zeroshot_no_place.jpg" data-src="static/videos/rollouts/zeroshot_no_place.mp4"></video>
             <figcaption><span class="tag tag-robot">Franka</span><span class="tag tag-base">Baseline</span><span class="tag tag-fail">zero-shot &middot; fail: goal not reached</span><span class="instr">&pi;<sub>0.5</sub>, released LIBERO checkpoint. &ldquo;pick up the black bowl behind the ramekin and place it right of the plate&rdquo;: correct bowl selected, placement relation never achieved.</span></figcaption>
           </figure>
         </div>
@@ -400,10 +853,10 @@
         </div>
         <p class="table-note">0-shot uses the GR1-compatible checkpoint before fine-tuning (&ndash;: no 29-D GR1 action head before fine-tuning).</p>
 
-        <figure class="figure figure-mid">
-          <img src="static/images/drop_per_dimension.png" alt="Mean relative RSR drop from seen to L1-L3 per changed dimension for each Franka policy; the semantic dimension gives the largest drop for most policies." width="775" height="501" loading="lazy" class="zoomable">
-          <figcaption><strong>Mean drop per dimension (Franka).</strong> Mean relative RSR drop over L1&ndash;L3 versus seen, per changed dimension; the circle marks the largest drop. Low-RSR policies have little room left to drop.</figcaption>
-        </figure>
+        <figure class="figure hfig " data-zoom role="group" aria-label="Mean relative RSR drop per changed dimension for each Franka policy">
+<div class="hfig-body"><svg viewBox="0 0 660 560" role="img" aria-labelledby="t-drop" class="chart-svg"><title id="t-drop">Mean relative RSR drop per changed dimension for each Franka policy</title><circle cx="190.0" cy="22.0" r="5" class="m-vsr"/><text x="202" y="27">VSR</text><rect x="263.5" y="17.5" width="9" height="9" class="m-ssu"/><text x="280" y="27">SSU</text><path d="M346.0 16.5l-5.5 9.5h11z" class="m-scr"/><text x="358" y="27">SCR</text><path d="M424.0 16.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="436" y="27">OCD</text><circle cx="506" cy="22" r="8" class="ring"/><text x="520" y="27">max</text><line x1="302.5" x2="302.5" y1="50" y2="490" class="grid"/><line x1="415.0" x2="415.0" y1="50" y2="490" class="grid"/><line x1="527.5" x2="527.5" y1="50" y2="490" class="grid"/><rect x="190" y="50" width="450" height="440" class="frame"/><text x="190.0" y="512" text-anchor="middle">0</text><text x="302.5" y="512" text-anchor="middle">25</text><text x="415.0" y="512" text-anchor="middle">50</text><text x="527.5" y="512" text-anchor="middle">75</text><text x="640.0" y="512" text-anchor="middle">100</text><text x="415.0" y="536" text-anchor="middle" class="axl">mean RSR drop vs. seen, L1&ndash;L3 (%)</text><text x="182" y="75.0" text-anchor="end">π<tspan class="sub" dy="4">0.5</tspan></text><line x1="210.3" x2="341.2" y1="70.0" y2="70.0" class="range"/><circle cx="294.8" cy="67.0" r="5" class="m-vsr"/><circle cx="341.2" cy="69.0" r="9" class="ring r-ssu"/><rect x="336.7" y="64.5" width="9" height="9" class="m-ssu"/><path d="M210.3 65.5l-5.5 9.5h11z" class="m-scr"/><path d="M244.9 67.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="115.0" text-anchor="end">GR00T N1.7</text><line x1="287.2" x2="387.6" y1="110.0" y2="110.0" class="range"/><circle cx="345.7" cy="107.0" r="5" class="m-vsr"/><circle cx="387.6" cy="109.0" r="9" class="ring r-ssu"/><rect x="383.1" y="104.5" width="9" height="9" class="m-ssu"/><path d="M287.2 105.5l-5.5 9.5h11z" class="m-scr"/><path d="M309.7 107.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="155.0" text-anchor="end">OpenVLA-OFT</text><line x1="517.6" x2="527.1" y1="150.0" y2="150.0" class="range"/><circle cx="524.3" cy="147.0" r="5" class="m-vsr"/><circle cx="527.1" cy="149.0" r="9" class="ring r-ssu"/><rect x="522.6" y="144.5" width="9" height="9" class="m-ssu"/><path d="M517.6 145.5l-5.5 9.5h11z" class="m-scr"/><path d="M526.6 147.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="14" y="110.0" text-anchor="middle" class="grp" transform="rotate(-90 14 110.0)">Gen.</text><line x1="0" x2="640" y1="170" y2="170" class="sep"/><text x="182" y="195.0" text-anchor="end">GAM</text><line x1="525.7" x2="583.3" y1="190.0" y2="190.0" class="range"/><circle cx="547.3" cy="187.0" r="5" class="m-vsr"/><circle cx="583.3" cy="189.0" r="9" class="ring r-ssu"/><rect x="578.8" y="184.5" width="9" height="9" class="m-ssu"/><path d="M525.7 185.5l-5.5 9.5h11z" class="m-scr"/><path d="M560.8 187.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="235.0" text-anchor="end">Spatial Forcing</text><line x1="466.8" x2="508.6" y1="230.0" y2="230.0" class="range"/><circle cx="498.7" cy="227.0" r="5" class="m-vsr"/><circle cx="508.6" cy="229.0" r="9" class="ring r-ssu"/><rect x="504.1" y="224.5" width="9" height="9" class="m-ssu"/><path d="M466.8 225.5l-5.5 9.5h11z" class="m-scr"/><path d="M471.2 227.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="14" y="210.0" text-anchor="middle" class="grp" transform="rotate(-90 14 210.0)">Geo.</text><line x1="0" x2="640" y1="250" y2="250" class="sep"/><text x="182" y="275.0" text-anchor="end">LaWAM</text><line x1="218.8" x2="349.3" y1="270.0" y2="270.0" class="range"/><circle cx="332.7" cy="267.0" r="5" class="m-vsr"/><circle cx="349.3" cy="269.0" r="9" class="ring r-ssu"/><rect x="344.8" y="264.5" width="9" height="9" class="m-ssu"/><path d="M218.8 265.5l-5.5 9.5h11z" class="m-scr"/><path d="M289.9 267.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="315.0" text-anchor="end">Fast-WAM</text><line x1="522.6" x2="544.6" y1="310.0" y2="310.0" class="range"/><circle cx="544.6" cy="307.0" r="9" class="ring r-vsr"/><circle cx="544.6" cy="307.0" r="5" class="m-vsr"/><rect x="532.0" y="304.5" width="9" height="9" class="m-ssu"/><path d="M541.4 305.5l-5.5 9.5h11z" class="m-scr"/><path d="M522.6 307.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="14" y="290.0" text-anchor="middle" class="grp" transform="rotate(-90 14 290.0)">WM</text><line x1="0" x2="640" y1="330" y2="330" class="sep"/><text x="182" y="355.0" text-anchor="end">MolmoAct2</text><line x1="221.1" x2="332.7" y1="350.0" y2="350.0" class="range"/><circle cx="299.8" cy="347.0" r="5" class="m-vsr"/><circle cx="332.7" cy="349.0" r="9" class="ring r-ssu"/><rect x="328.2" y="344.5" width="9" height="9" class="m-ssu"/><path d="M221.1 345.5l-5.5 9.5h11z" class="m-scr"/><path d="M279.1 347.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="395.0" text-anchor="end">InstructVLA</text><line x1="307.9" x2="421.8" y1="390.0" y2="390.0" class="range"/><circle cx="383.1" cy="387.0" r="5" class="m-vsr"/><circle cx="421.8" cy="389.0" r="9" class="ring r-ssu"/><rect x="417.3" y="384.5" width="9" height="9" class="m-ssu"/><path d="M307.9 385.5l-5.5 9.5h11z" class="m-scr"/><path d="M311.9 387.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="14" y="370.0" text-anchor="middle" class="grp" transform="rotate(-90 14 370.0)">Rea.</text><line x1="0" x2="640" y1="410" y2="410" class="sep"/><text x="182" y="435.0" text-anchor="end">π<tspan class="sub" dy="4">RL</tspan></text><line x1="227.8" x2="342.1" y1="430.0" y2="430.0" class="range"/><circle cx="289.0" cy="427.0" r="5" class="m-vsr"/><circle cx="342.1" cy="429.0" r="9" class="ring r-ssu"/><rect x="337.6" y="424.5" width="9" height="9" class="m-ssu"/><path d="M227.8 425.5l-5.5 9.5h11z" class="m-scr"/><path d="M266.1 427.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="182" y="475.0" text-anchor="end">SimpleVLA-RL</text><line x1="516.7" x2="550.9" y1="470.0" y2="470.0" class="range"/><circle cx="536.9" cy="467.0" r="5" class="m-vsr"/><circle cx="550.9" cy="469.0" r="9" class="ring r-ssu"/><rect x="546.4" y="464.5" width="9" height="9" class="m-ssu"/><path d="M516.7 465.5l-5.5 9.5h11z" class="m-scr"/><path d="M521.7 467.5l5.5 5.5l-5.5 5.5l-5.5 -5.5z" class="m-ocd"/><text x="14" y="450.0" text-anchor="middle" class="grp" transform="rotate(-90 14 450.0)">RL</text></svg></div>
+<figcaption><strong>Mean drop per dimension (Franka).</strong> Mean relative RSR drop over L1&ndash;L3 versus seen, per changed dimension; the circle marks the largest drop. Low-RSR policies have little room left to drop.</figcaption>
+</figure>
       </div>
     </section>
 
@@ -420,14 +873,14 @@
       </div>
       <div class="container">
         <div class="split split-findings">
-          <figure class="figure">
-            <img src="static/images/finding_distance.png" alt="Gap at which fitted selection falls to 75 percent, and selection slope in points per centimetre, for seven Franka policies." width="775" height="266" loading="lazy" class="zoomable">
-            <figcaption>Finding 2: distance tolerance (M<sub>75</sub>) and selection slope per cm on Franka.</figcaption>
-          </figure>
-          <figure class="figure">
-            <img src="static/images/finding_target_updates.png" alt="Excess of old-target choices over the 50 percent chance level among wrong first lifts, under anchor moves and relation flips, for seven Franka policies." width="800" height="350" loading="lazy" class="zoomable">
-            <figcaption>Finding 3: old-target excess over 50% chance among wrong first lifts (starred: 95% interval above chance).</figcaption>
-          </figure>
+          <figure class="figure hfig " data-zoom role="group" aria-label="Distance tolerance and selection slope, seven Franka policies">
+<div class="hfig-body"><svg viewBox="0 0 640 330" role="img" aria-labelledby="t-dist" class="chart-svg"><title id="t-dist">Distance tolerance and selection slope for seven Franka policies</title><text x="305.0" y="22" text-anchor="middle" class="bold">75% gap M<tspan class="sub" dy="4">75</tspan><tspan dy="-4"> (cm)</tspan></text><line x1="200.0" x2="200.0" y1="42" y2="286" class="grid"/><text x="200.0" y="306" text-anchor="middle">0</text><line x1="293.3" x2="293.3" y1="42" y2="286" class="grid"/><text x="293.3" y="306" text-anchor="middle">8</text><line x1="386.7" x2="386.7" y1="42" y2="286" class="grid"/><text x="386.7" y="306" text-anchor="middle">16</text><line x1="200.0" x2="200.0" y1="42" y2="286" class="axis"/><text x="190" y="70.0" text-anchor="end">π<tspan class="sub" dy="4">0.5</tspan></text><rect x="200.0" y="56.0" width="155.2" height="18" class="b-gap"/><path d="M338.8 65.0H376.2M338.8 60.0v10M376.2 60.0v10" class="whisk"/><text x="190" y="104.0" text-anchor="end">GR00T N1.7</text><rect x="200.0" y="90.0" width="150.5" height="18" class="b-gap"/><path d="M334.2 99.0H375.0M334.2 94.0v10M375.0 94.0v10" class="whisk"/><text x="190" y="138.0" text-anchor="end">OpenVLA-OFT</text><text x="206.0" y="138.0" class="nr">n.r.</text><text x="190" y="172.0" text-anchor="end">Spatial Forcing</text><text x="206.0" y="172.0" class="nr">n.r.</text><text x="190" y="206.0" text-anchor="end">LaWAM</text><rect x="200.0" y="192.0" width="134.2" height="18" class="b-gap"/><path d="M315.5 201.0H356.3M315.5 196.0v10M356.3 196.0v10" class="whisk"/><text x="190" y="240.0" text-anchor="end">InstructVLA</text><rect x="200.0" y="226.0" width="84.0" height="18" class="b-gap"/><path d="M251.3 235.0H307.3M251.3 230.0v10M307.3 230.0v10" class="whisk"/><text x="190" y="274.0" text-anchor="end">π<tspan class="sub" dy="4">RL</tspan></text><rect x="200.0" y="260.0" width="155.2" height="18" class="b-gap"/><path d="M337.7 269.0H382.0M337.7 264.0v10M382.0 264.0v10" class="whisk"/><text x="535.0" y="22" text-anchor="middle" class="bold">Selection slope (pp/cm)</text><line x1="450.2" x2="450.2" y1="42" y2="286" class="grid"/><text x="450.2" y="306" text-anchor="middle">&minus;4</text><line x1="518.0" x2="518.0" y1="42" y2="286" class="grid"/><text x="518.0" y="306" text-anchor="middle">&minus;2</text><line x1="585.9" x2="585.9" y1="42" y2="286" class="grid"/><text x="585.9" y="306" text-anchor="middle">0</text><line x1="585.9" x2="585.9" y1="42" y2="286" class="axis"/><rect x="494.3" y="56.0" width="91.6" height="18" class="b-slope"/><path d="M463.8 65.0H521.4M463.8 60.0v10M521.4 60.0v10" class="whisk"/><rect x="501.1" y="90.0" width="84.8" height="18" class="b-slope"/><path d="M470.5 99.0H528.2M470.5 94.0v10M528.2 94.0v10" class="whisk"/><rect x="538.4" y="124.0" width="47.5" height="18" class="b-slope"/><path d="M501.1 133.0H572.3M501.1 128.0v10M572.3 128.0v10" class="whisk"/><rect x="575.7" y="158.0" width="10.2" height="18" class="b-grey"/><path d="M538.4 167.0H613.0M538.4 162.0v10M613.0 162.0v10" class="whisk"/><rect x="490.9" y="192.0" width="95.0" height="18" class="b-slope"/><path d="M460.4 201.0H521.4M460.4 196.0v10M521.4 196.0v10" class="whisk"/><rect x="487.5" y="226.0" width="98.4" height="18" class="b-slope"/><path d="M457.0 235.0H518.0M457.0 230.0v10M518.0 230.0v10" class="whisk"/><rect x="501.1" y="260.0" width="84.8" height="18" class="b-slope"/><path d="M470.5 269.0H531.6M470.5 264.0v10M531.6 264.0v10" class="whisk"/></svg></div>
+<figcaption>Finding 2: distance tolerance (M<sub>75</sub>) and selection slope per cm on Franka.</figcaption>
+</figure>
+          <figure class="figure hfig " data-zoom role="group" aria-label="Old-target excess over chance, seven Franka policies">
+<div class="hfig-body"><svg viewBox="0 0 740 400" role="img" aria-labelledby="t-tgt" class="chart-svg"><title id="t-tgt">Old-target excess over chance among wrong first lifts, for seven Franka policies</title><circle cx="24" cy="24" r="9" class="tr-old"/><circle cx="24" cy="24" r="6" class="bowl"/><text x="42" y="29">old target</text><circle cx="24" cy="56" r="9" class="tr-new"/><circle cx="24" cy="56" r="6" class="bowl"/><text x="42" y="61">new target</text><rect x="17" y="80" width="14" height="14" class="anchor"/><text x="42" y="93">anchor</text><text x="285.0" y="22" text-anchor="middle" class="bold">Anchor moved</text><rect x="257.0" y="52" width="16" height="16" class="anchor dash"/><rect x="303.0" y="52" width="16" height="16" class="anchor"/><circle cx="215" cy="60" r="10" class="tr-old"/><circle cx="215" cy="60" r="6" class="bowl"/><circle cx="281" cy="60" r="10" class="tr-new"/><circle cx="281" cy="60" r="6" class="bowl"/><circle cx="347" cy="60" r="6" class="bowl"/><path d="M265.0 50Q285.0 28 309.0 48" class="arc"/><text x="285.0" y="104" text-anchor="middle" class="note">&ldquo;left of the anchor&rdquo;</text><line x1="190.0" x2="190.0" y1="142" y2="388" class="grid"/><text x="190.0" y="136" text-anchor="middle" class="tick">&minus;20</text><line x1="253.3" x2="253.3" y1="142" y2="388" class="grid"/><text x="253.3" y="136" text-anchor="middle" class="tick">0</text><line x1="316.7" x2="316.7" y1="142" y2="388" class="grid"/><text x="316.7" y="136" text-anchor="middle" class="tick">+20</text><line x1="380.0" x2="380.0" y1="142" y2="388" class="grid"/><text x="380.0" y="136" text-anchor="middle" class="tick">+40</text><line x1="253.3" x2="253.3" y1="142" y2="388" class="axis"/><text x="180" y="172.0" text-anchor="end">π<tspan class="sub" dy="4">0.5</tspan></text><rect x="247.0" y="158.0" width="6.3" height="18" class="b-below"/><text x="436.0" y="172.0" text-anchor="end">&minus;2.0</text><text x="180" y="206.0" text-anchor="end">GR00T N1.7</text><rect x="253.3" y="192.0" width="28.5" height="18" class="b-exc"/><text x="436.0" y="206.0" text-anchor="end">+9.0</text><text x="180" y="240.0" text-anchor="end">OpenVLA-OFT</text><rect x="253.3" y="226.0" width="89.9" height="18" class="b-exc-sig"/><text x="436.0" y="240.0" text-anchor="end">+28.4<tspan class="star" dy="-5">*</tspan></text><text x="180" y="274.0" text-anchor="end">Spatial Forcing</text><rect x="253.3" y="260.0" width="93.4" height="18" class="b-exc-sig"/><text x="436.0" y="274.0" text-anchor="end">+29.5<tspan class="star" dy="-5">*</tspan></text><text x="180" y="308.0" text-anchor="end">LaWAM</text><rect x="253.3" y="294.0" width="39.6" height="18" class="b-exc"/><text x="436.0" y="308.0" text-anchor="end">+12.5</text><text x="180" y="342.0" text-anchor="end">InstructVLA</text><rect x="217.2" y="328.0" width="36.1" height="18" class="b-below"/><text x="436.0" y="342.0" text-anchor="end">&minus;11.4</text><text x="180" y="376.0" text-anchor="end">π<tspan class="sub" dy="4">RL</tspan></text><rect x="253.3" y="362.0" width="44.0" height="18" class="b-exc"/><text x="436.0" y="376.0" text-anchor="end">+13.9</text><text x="565.0" y="22" text-anchor="middle" class="bold">Relation flipped</text><rect x="557.0" y="52" width="16" height="16" class="anchor"/><circle cx="513" cy="60" r="10" class="tr-old"/><circle cx="513" cy="60" r="6" class="bowl"/><circle cx="617" cy="60" r="10" class="tr-new"/><circle cx="617" cy="60" r="6" class="bowl"/><circle cx="665" cy="60" r="6" class="bowl"/><text x="565.0" y="104" text-anchor="middle" class="note">&ldquo;left of&rdquo; &rarr; &ldquo;right of&rdquo;</text><line x1="470.0" x2="470.0" y1="142" y2="388" class="grid"/><text x="470.0" y="136" text-anchor="middle" class="tick">&minus;20</text><line x1="533.3" x2="533.3" y1="142" y2="388" class="grid"/><text x="533.3" y="136" text-anchor="middle" class="tick">0</text><line x1="596.7" x2="596.7" y1="142" y2="388" class="grid"/><text x="596.7" y="136" text-anchor="middle" class="tick">+20</text><line x1="660.0" x2="660.0" y1="142" y2="388" class="grid"/><text x="660.0" y="136" text-anchor="middle" class="tick">+40</text><line x1="533.3" x2="533.3" y1="142" y2="388" class="axis"/><rect x="533.3" y="158.0" width="17.7" height="18" class="b-exc"/><text x="716.0" y="172.0" text-anchor="end">+5.6</text><rect x="522.9" y="192.0" width="10.5" height="18" class="b-below"/><text x="716.0" y="206.0" text-anchor="end">&minus;3.3</text><rect x="533.3" y="226.0" width="49.1" height="18" class="b-exc-sig"/><text x="716.0" y="240.0" text-anchor="end">+15.5<tspan class="star" dy="-5">*</tspan></text><rect x="533.3" y="260.0" width="41.5" height="18" class="b-exc"/><text x="716.0" y="274.0" text-anchor="end">+13.1</text><rect x="533.3" y="294.0" width="67.8" height="18" class="b-exc"/><text x="716.0" y="308.0" text-anchor="end">+21.4</text><rect x="533.3" y="328.0" width="18.4" height="18" class="b-exc"/><text x="716.0" y="342.0" text-anchor="end">+5.8</text><rect x="533.3" y="362.0" width="86.8" height="18" class="b-exc-sig"/><text x="716.0" y="376.0" text-anchor="end">+27.4<tspan class="star" dy="-5">*</tspan></text></svg></div>
+<figcaption>Finding 3: old-target excess over 50% chance among wrong first lifts (starred: 95% interval above chance).</figcaption>
+</figure>
         </div>
       </div>
     </section>
