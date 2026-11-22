@@ -80,6 +80,66 @@
     });
   });
 
+  // ---- Dimension rollouts: one player per dimension, clips play one after another ----
+  // Each [data-dimroll] block has a Franka and a GR1 video; both show the same step (sub-factor A,
+  // sub-factor B) and the block advances once both clips have ended, looping back to the first step.
+  // The step buttons jump; the block plays only while visible; the next step's clips are prefetched
+  // with preload="metadata" only.
+  var ROBOTS = ['franka', 'gr1'];
+  function clipSrc(r, f) { return 'static/videos/' + r + '/' + f + '.mp4'; }
+  function clipPoster(r, f) { return 'static/images/posters/' + r + '_' + f + '.jpg'; }
+  var dimrolls = Array.prototype.slice.call(document.querySelectorAll('[data-dimroll]'));
+  dimrolls.forEach(function (blk) {
+    var steps = Array.prototype.slice.call(blk.querySelectorAll('.dr-step'));
+    var caps = Array.prototype.slice.call(blk.querySelectorAll('.dr-cap'));
+    var vids = Array.prototype.slice.call(blk.querySelectorAll('.dr-v video'));
+    var badges = Array.prototype.slice.call(blk.querySelectorAll('.dr-badge .dr-sf'));
+    var pre = ROBOTS.map(function () { var p = document.createElement('video'); p.muted = true; p.preload = 'metadata'; return p; });
+    var cur = 0, started = false, visible = false, done = [false, false];
+    function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    function setStep(k) {
+      cur = (k + steps.length) % steps.length;
+      started = true; done = [false, false];
+      var b = steps[cur], nb = steps[(cur + 1) % steps.length];
+      steps.forEach(function (s, j) { s.classList.toggle('on', j === cur); s.setAttribute('aria-pressed', j === cur ? 'true' : 'false'); s.querySelector('.dr-prog').style.width = '0'; });
+      caps.forEach(function (c, j) { c.classList.toggle('on', j === cur); });
+      badges.forEach(function (x, i) { x.textContent = (i ? b.dataset.lg : b.dataset.lf) || b.dataset.label; });
+      vids.forEach(function (v, i) {
+        var r = ROBOTS[i], f = b.dataset[r];
+        v.poster = clipPoster(r, f);
+        v.preload = 'auto';
+        v.src = clipSrc(r, f);
+        if (visible) play(v);
+        var nf = nb.dataset[ROBOTS[i]];
+        if (nb !== b && pre[i].dataset.f !== nf) { pre[i].dataset.f = nf; pre[i].src = clipSrc(ROBOTS[i], nf); }
+      });
+      blk.dataset.step = String(cur);
+    }
+    vids.forEach(function (v, i) {
+      v.addEventListener('ended', function () {
+        done[i] = true;
+        if (done.every(Boolean)) setStep(cur + 1);
+      });
+      v.addEventListener('timeupdate', function () {
+        // progress of the step = progress of the longer clip
+        var p = 0;
+        var longest = vids.reduce(function (a, x) { return x.duration > (a ? a.duration : 0) ? x : a; }, null);
+        if (longest && longest.duration) p = longest.currentTime / longest.duration;
+        steps[cur].querySelector('.dr-prog').style.width = (100 * Math.min(1, p)) + '%';
+      });
+    });
+    steps.forEach(function (s, j) { s.addEventListener('click', function () { visible = true; setStep(j); }); });
+    function onVis(isVis) {
+      visible = isVis;
+      if (isVis) { if (!started) setStep(0); else vids.forEach(function (v, i) { if (!done[i]) play(v); }); }
+      else vids.forEach(function (v) { if (!v.paused) v.pause(); });
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { onVis(e.isIntersecting); }); },
+        { rootMargin: '100px 0px', threshold: 0.2 }).observe(blk.querySelector('.fc'));
+    } else onVis(true);
+  });
+
   // ---- Fixed-canvas figures ----
   // A .fc[data-w] holds one .fc-in laid out at the fixed design width data-w (CSS px). The inner box is
   // scaled uniformly with transform: scale(), and the outer height follows, so text that is positioned

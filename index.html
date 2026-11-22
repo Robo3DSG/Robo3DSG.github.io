@@ -155,6 +155,45 @@
           </div>
         </div>
 
+        <!-- dim-rollouts:begin -->
+        <h3 class="sub-title">Examples per dimension</h3>
+        <p class="body-text narrow">For each dimension, Franka (left) and GR1 (right) demonstrations of its two sub-factors play one after another (the unchanged baseline task is in the video gallery below). Click a step to jump; the caption names the robot, sub-factor, setting and instruction of the clip that is playing.</p>
+        <div class="dimrolls">
+<figure class="dimroll dim-vsr" data-dimroll aria-label="VSR example clips, played one after another">
+<div class="dr-head"><span class="dim-tag">VSR</span><b class="dr-name">Visual Spatial Robustness</b><div class="dr-steps" role="group" aria-label="VSR clips"><button type="button" class="dr-step on" aria-pressed="true" data-label="background" data-lf="background" data-lg="background" data-franka="background" data-gr1="background"><span class="dr-n">1</span>background<i class="dr-prog"></i></button><button type="button" class="dr-step" aria-pressed="false" data-label="clutter" data-lf="clutter" data-lg="clutter" data-franka="clutter" data-gr1="clutter"><span class="dr-n">2</span>clutter<i class="dr-prog"></i></button></div></div>
+<div class="fc" data-w="984"><div class="fc-in"><div class="dr-grid">
+<div class="dr-v"><video muted playsinline preload="none" width="372" height="372" poster="static/images/posters/franka_background.jpg" aria-label="Franka demonstration"></video><span class="dr-badge"><b>Franka</b> <span class="dr-sf">background</span></span></div>
+<div class="dr-v"><video muted playsinline preload="none" width="595" height="372" poster="static/images/posters/gr1_background.jpg" aria-label="GR1 demonstration"></video><span class="dr-badge"><b>GR1</b> <span class="dr-sf">background</span></span></div>
+</div></div></div>
+<figcaption class="dr-caps"><p class="dr-cap on"><span class="tag tag-vsr">VSR &middot; background</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl between the plate and the cookie box and place it in front of the ramekin&rdquo;<br><b>GR1</b> &ldquo;pick up the can behind the pot and place it in front of the pot&rdquo;</p><p class="dr-cap"><span class="tag tag-vsr">VSR &middot; clutter</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl on the cookie box and place it right of the plate&rdquo;<br><b>GR1</b> &ldquo;pick up the can between the tray and the bowl and place it behind the pot&rdquo;</p></figcaption>
+</figure>
+<figure class="dimroll dim-ssu" data-dimroll aria-label="SSU example clips, played one after another">
+<div class="dr-head"><span class="dim-tag">SSU</span><b class="dr-name">Semantic Spatial Understanding</b><div class="dr-steps" role="group" aria-label="SSU clips"><button type="button" class="dr-step on" aria-pressed="true" data-label="synonym" data-lf="synonym" data-lg="synonym" data-franka="synonym" data-gr1="synonym"><span class="dr-n">1</span>synonym<i class="dr-prog"></i></button><button type="button" class="dr-step" aria-pressed="false" data-label="flip (new target)" data-lf="flip (new target)" data-lg="flip (new target)" data-franka="flip" data-gr1="flip"><span class="dr-n">2</span>flip (new target)<i class="dr-prog"></i></button></div></div>
+<div class="fc" data-w="984"><div class="fc-in"><div class="dr-grid">
+<div class="dr-v"><video muted playsinline preload="none" width="372" height="372" poster="static/images/posters/franka_synonym.jpg" aria-label="Franka demonstration"></video><span class="dr-badge"><b>Franka</b> <span class="dr-sf">synonym</span></span></div>
+<div class="dr-v"><video muted playsinline preload="none" width="595" height="372" poster="static/images/posters/gr1_synonym.jpg" aria-label="GR1 demonstration"></video><span class="dr-badge"><b>GR1</b> <span class="dr-sf">synonym</span></span></div>
+</div></div></div>
+<figcaption class="dr-caps"><p class="dr-cap on"><span class="tag tag-ssu">SSU &middot; synonym</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl that is in front of the ramekin and place it behind the plate&rdquo;<br><b>GR1</b> &ldquo;pick up the can on the left side of the pan and place it on the right side of the pan&rdquo;</p><p class="dr-cap"><span class="tag tag-ssu">SSU &middot; flip (new target)</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl left of the cookie box and place it behind the ramekin&rdquo;<br><b>GR1</b> &ldquo;pick up the can to the right of the cutting board and place it in the pan&rdquo;</p></figcaption>
+</figure>
+<figure class="dimroll dim-ocd" data-dimroll aria-label="OCD example clips, played one after another">
+<div class="dr-head"><span class="dim-tag">OCD</span><b class="dr-name">Object-Centric Distance</b><div class="dr-steps" role="group" aria-label="OCD clips"><button type="button" class="dr-step on" aria-pressed="true" data-label="near gap" data-lf="near gap" data-lg="near gap" data-franka="gap_near" data-gr1="gap_near"><span class="dr-n">1</span>near gap<i class="dr-prog"></i></button><button type="button" class="dr-step" aria-pressed="false" data-label="far gap" data-lf="far gap" data-lg="far gap" data-franka="gap_far" data-gr1="gap_far"><span class="dr-n">2</span>far gap<i class="dr-prog"></i></button></div></div>
+<div class="fc" data-w="984"><div class="fc-in"><div class="dr-grid">
+<div class="dr-v"><video muted playsinline preload="none" width="372" height="372" poster="static/images/posters/franka_gap_near.jpg" aria-label="Franka demonstration"></video><span class="dr-badge"><b>Franka</b> <span class="dr-sf">near gap</span></span></div>
+<div class="dr-v"><video muted playsinline preload="none" width="595" height="372" poster="static/images/posters/gr1_gap_near.jpg" aria-label="GR1 demonstration"></video><span class="dr-badge"><b>GR1</b> <span class="dr-sf">near gap</span></span></div>
+</div></div></div>
+<figcaption class="dr-caps"><p class="dr-cap on"><span class="tag tag-ocd">OCD &middot; near gap</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl nearest to the ramekin and place it behind the plate&rdquo;<br><b>GR1</b> &ldquo;pick up the can to the right of the bowl and place it in front of the bowl&rdquo;</p><p class="dr-cap"><span class="tag tag-ocd">OCD &middot; far gap</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl in front of the ramekin and place it on the plate&rdquo;<br><b>GR1</b> &ldquo;pick up the can behind the cardboard box and place it in the cardboard box&rdquo;</p></figcaption>
+</figure>
+<figure class="dimroll dim-scr" data-dimroll aria-label="SCR example clips, played one after another">
+<div class="dr-head"><span class="dim-tag">SCR</span><b class="dr-name">Spatial Configuration Robustness</b><div class="dr-steps" role="group" aria-label="SCR clips"><button type="button" class="dr-step on" aria-pressed="true" data-label="extra bowl / can" data-lf="extra bowl" data-lg="extra can" data-franka="extra_bowl" data-gr1="extra_can"><span class="dr-n">1</span>extra bowl / can<i class="dr-prog"></i></button><button type="button" class="dr-step" aria-pressed="false" data-label="anchor move (new target)" data-lf="anchor move (new target)" data-lg="anchor move (new target)" data-franka="anchor_move" data-gr1="anchor_move"><span class="dr-n">2</span>anchor move (new target)<i class="dr-prog"></i></button></div></div>
+<div class="fc" data-w="984"><div class="fc-in"><div class="dr-grid">
+<div class="dr-v"><video muted playsinline preload="none" width="372" height="372" poster="static/images/posters/franka_extra_bowl.jpg" aria-label="Franka demonstration"></video><span class="dr-badge"><b>Franka</b> <span class="dr-sf">extra bowl</span></span></div>
+<div class="dr-v"><video muted playsinline preload="none" width="595" height="372" poster="static/images/posters/gr1_extra_can.jpg" aria-label="GR1 demonstration"></video><span class="dr-badge"><b>GR1</b> <span class="dr-sf">extra can</span></span></div>
+</div></div></div>
+<figcaption class="dr-caps"><p class="dr-cap on"><span class="tag tag-scr">SCR &middot; extra bowl / can</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl right of the ramekin and place it in front of the cookie box&rdquo;<br><b>GR1</b> &ldquo;pick up the can to the right of the cardboard box and place it in the cardboard box&rdquo;</p><p class="dr-cap"><span class="tag tag-scr">SCR &middot; anchor move (new target)</span><span class="dr-lvl">training demonstration (seen setting)</span><br><b>Franka</b> &ldquo;pick up the black bowl next to the plate and place it on the ramekin&rdquo;<br><b>GR1</b> &ldquo;pick up the can behind the plate and place it on the plate&rdquo;</p></figcaption>
+</figure>
+        </div>
+        <details class="table-details dr-old">
+          <summary>All settings: GR1 sub-factors at base, easy, medium and hard strength (still images)</summary>
         <figure class="figure hfig figure-narrow" data-zoom role="group" aria-label="GR1 example scenes for the eight sub-factors at base, easy, medium and hard strength">
 <div class="hfig-body fc" data-w="560"><div class="fc-in"><div class="lvl-grid lg-sf"><span></span><b class="lg-head">base</b><b class="lg-head">easy</b><b class="lg-head">medium</b><b class="lg-head">hard</b>
 <b class="lg-row">background</b>
@@ -200,6 +239,8 @@
 </div></div></div>
 <figcaption>The eight sub-factors on GR1 at base, easy, medium and hard strength (target can ringed in green; the setting is printed under each tile).</figcaption>
 </figure>
+</details>
+        <!-- dim-rollouts:end -->
 
         <h3 class="sub-title">Difficulty levels</h3>
         <div class="levels">
